@@ -81,6 +81,9 @@
 		9C758E5F1AD113F4005EBEAE /* MolurenSchool */ = {
 			isa = PBXGroup;
 			children = (
+				9C758E861AD11426005EBEAE /* Control */,
+				9C758E871AD11426005EBEAE /* Model */,
+				9C758E881AD11426005EBEAE /* View */,
 				9C758E641AD113F4005EBEAE /* AppDelegate.h */,
 				9C758E651AD113F4005EBEAE /* AppDelegate.m */,
 				9C758E671AD113F4005EBEAE /* ViewController.h */,
@@ -117,6 +120,27 @@
 				9C758E7B1AD113F4005EBEAE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C758E861AD11426005EBEAE /* Control */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		9C758E871AD11426005EBEAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9C758E881AD11426005EBEAE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
