@@ -14,6 +14,9 @@
 		9C758E6E1AD113F4005EBEAE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E6D1AD113F4005EBEAE /* Images.xcassets */; };
 		9C758E711AD113F4005EBEAE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E6F1AD113F4005EBEAE /* LaunchScreen.xib */; };
 		9C758E7D1AD113F4005EBEAE /* MolurenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */; };
+		9C758E8A1AD1154B005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E891AD1154B005EBEAE /* Setting */; };
+		9C758E8C1AD11575005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E8B1AD11575005EBEAE /* Setting */; };
+		9C758E911AD115A8005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E901AD115A8005EBEAE /* Setting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,9 @@
 		9C758E761AD113F4005EBEAE /* MolurenSchoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MolurenSchoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C758E7B1AD113F4005EBEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MolurenSchoolTests.m; sourceTree = "<group>"; };
+		9C758E891AD1154B005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
+		9C758E8B1AD11575005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
+		9C758E901AD115A8005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +87,7 @@
 		9C758E5F1AD113F4005EBEAE /* MolurenSchool */ = {
 			isa = PBXGroup;
 			children = (
-				9C758E861AD11426005EBEAE /* Control */,
+				9C758E8F1AD115A8005EBEAE /* Controller */,
 				9C758E871AD11426005EBEAE /* Model */,
 				9C758E881AD11426005EBEAE /* View */,
 				9C758E641AD113F4005EBEAE /* AppDelegate.h */,
@@ -122,16 +128,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9C758E861AD11426005EBEAE /* Control */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Control;
-			sourceTree = "<group>";
-		};
 		9C758E871AD11426005EBEAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C758E8B1AD11575005EBEAE /* Setting */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -139,8 +139,18 @@
 		9C758E881AD11426005EBEAE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9C758E891AD1154B005EBEAE /* Setting */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9C758E8F1AD115A8005EBEAE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9C758E901AD115A8005EBEAE /* Setting */,
+			);
+			name = Controller;
+			path = Model/Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +234,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C758E6C1AD113F4005EBEAE /* Main.storyboard in Resources */,
+				9C758E8A1AD1154B005EBEAE /* Setting in Resources */,
 				9C758E711AD113F4005EBEAE /* LaunchScreen.xib in Resources */,
+				9C758E911AD115A8005EBEAE /* Setting in Resources */,
 				9C758E6E1AD113F4005EBEAE /* Images.xcassets in Resources */,
+				9C758E8C1AD11575005EBEAE /* Setting in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
