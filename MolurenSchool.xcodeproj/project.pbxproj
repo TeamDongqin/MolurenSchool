@@ -63,6 +63,16 @@
 		9C758E8A1AD1154B005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E891AD1154B005EBEAE /* Setting */; };
 		9C758E8C1AD11575005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E8B1AD11575005EBEAE /* Setting */; };
 		9C758E941AD11651005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E931AD11651005EBEAE /* Setting */; };
+		9CD21E011AD55F59004FDA47 /* TdStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E001AD55F59004FDA47 /* TdStudent.m */; };
+		9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E041AD55F8F004FDA47 /* CommonSetting.m */; };
+		9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E091AD56381004FDA47 /* FMDatabase.m */; };
+		9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */; };
+		9CD21E141AD56381004FDA47 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0D1AD56381004FDA47 /* FMDatabasePool.m */; };
+		9CD21E151AD56381004FDA47 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0F1AD56381004FDA47 /* FMDatabaseQueue.m */; };
+		9CD21E161AD56381004FDA47 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E111AD56381004FDA47 /* FMResultSet.m */; };
+		9CD21E181AD564C0004FDA47 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD21E171AD564C0004FDA47 /* libsqlite3.0.dylib */; };
+		9CD21E1B1AD56504004FDA47 /* TdMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E1A1AD56504004FDA47 /* TdMessage.m */; };
+		9CD21E1F1AD567B3004FDA47 /* TdMessageUnion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E1E1AD567B3004FDA47 /* TdMessageUnion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +199,27 @@
 		9C758E891AD1154B005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9C758E8B1AD11575005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9C758E931AD11651005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
+		9CD21DFF1AD55F59004FDA47 /* TdStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdStudent.h; sourceTree = "<group>"; };
+		9CD21E001AD55F59004FDA47 /* TdStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdStudent.m; sourceTree = "<group>"; };
+		9CD21E031AD55F8F004FDA47 /* CommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSetting.h; sourceTree = "<group>"; };
+		9CD21E041AD55F8F004FDA47 /* CommonSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSetting.m; sourceTree = "<group>"; };
+		9CD21E061AD56136004FDA47 /* Prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.h; sourceTree = "<group>"; };
+		9CD21E081AD56381004FDA47 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		9CD21E091AD56381004FDA47 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		9CD21E0A1AD56381004FDA47 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		9CD21E0C1AD56381004FDA47 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		9CD21E0D1AD56381004FDA47 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9CD21E0E1AD56381004FDA47 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		9CD21E0F1AD56381004FDA47 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		9CD21E101AD56381004FDA47 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		9CD21E111AD56381004FDA47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		9CD21E171AD564C0004FDA47 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		9CD21E191AD56504004FDA47 /* TdMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMessage.h; sourceTree = "<group>"; };
+		9CD21E1A1AD56504004FDA47 /* TdMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMessage.m; sourceTree = "<group>"; };
+		9CD21E1C1AD5653D004FDA47 /* CommonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonData.h; sourceTree = "<group>"; };
+		9CD21E1D1AD567B3004FDA47 /* TdMessageUnion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMessageUnion.h; sourceTree = "<group>"; };
+		9CD21E1E1AD567B3004FDA47 /* TdMessageUnion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMessageUnion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CD21E181AD564C0004FDA47 /* libsqlite3.0.dylib in Frameworks */,
 				9C3790461AD4B91B0009528F /* libresolv.dylib in Frameworks */,
 				9C378FE11AD4B80C0009528F /* libidn.a in Frameworks */,
 				9C378FC91AD4B67A0009528F /* Security.framework in Frameworks */,
@@ -216,6 +248,7 @@
 		9C378F241AD4B5860009528F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				9CD21E071AD56381004FDA47 /* FMDB */,
 				9C378FE21AD4B8BD0009528F /* XmppFramework */,
 				9C378FDB1AD4B80C0009528F /* libidn */,
 				9C378FCA1AD4B6A20009528F /* KissXML */,
@@ -475,6 +508,7 @@
 		9C758E541AD113F4005EBEAE = {
 			isa = PBXGroup;
 			children = (
+				9CD21E171AD564C0004FDA47 /* libsqlite3.0.dylib */,
 				9C3790451AD4B91B0009528F /* libresolv.dylib */,
 				9C378FC81AD4B67A0009528F /* Security.framework */,
 				9C378FC61AD4B66C0009528F /* CFNetwork.framework */,
@@ -500,6 +534,7 @@
 				9C758E871AD11426005EBEAE /* Model */,
 				9C758E881AD11426005EBEAE /* View */,
 				9C378F241AD4B5860009528F /* Libs */,
+				9CD21E021AD55F7E004FDA47 /* Common */,
 				9C758E641AD113F4005EBEAE /* AppDelegate.h */,
 				9C758E651AD113F4005EBEAE /* AppDelegate.m */,
 				9C758E671AD113F4005EBEAE /* ViewController.h */,
@@ -517,6 +552,7 @@
 			children = (
 				9C758E611AD113F4005EBEAE /* Info.plist */,
 				9C758E621AD113F4005EBEAE /* main.m */,
+				9CD21E061AD56136004FDA47 /* Prefix.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -544,6 +580,12 @@
 				9C758E8B1AD11575005EBEAE /* Setting */,
 				9C378F211AD4B1C30009528F /* TestXmpp.h */,
 				9C378F221AD4B1C30009528F /* TestXmpp.m */,
+				9CD21DFF1AD55F59004FDA47 /* TdStudent.h */,
+				9CD21E001AD55F59004FDA47 /* TdStudent.m */,
+				9CD21E191AD56504004FDA47 /* TdMessage.h */,
+				9CD21E1A1AD56504004FDA47 /* TdMessage.m */,
+				9CD21E1D1AD567B3004FDA47 /* TdMessageUnion.h */,
+				9CD21E1E1AD567B3004FDA47 /* TdMessageUnion.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -562,6 +604,33 @@
 				9C758E931AD11651005EBEAE /* Setting */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9CD21E021AD55F7E004FDA47 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9CD21E031AD55F8F004FDA47 /* CommonSetting.h */,
+				9CD21E041AD55F8F004FDA47 /* CommonSetting.m */,
+				9CD21E1C1AD5653D004FDA47 /* CommonData.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9CD21E071AD56381004FDA47 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				9CD21E081AD56381004FDA47 /* FMDatabase.h */,
+				9CD21E091AD56381004FDA47 /* FMDatabase.m */,
+				9CD21E0A1AD56381004FDA47 /* FMDatabaseAdditions.h */,
+				9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */,
+				9CD21E0C1AD56381004FDA47 /* FMDatabasePool.h */,
+				9CD21E0D1AD56381004FDA47 /* FMDatabasePool.m */,
+				9CD21E0E1AD56381004FDA47 /* FMDatabaseQueue.h */,
+				9CD21E0F1AD56381004FDA47 /* FMDatabaseQueue.m */,
+				9CD21E101AD56381004FDA47 /* FMResultSet.h */,
+				9CD21E111AD56381004FDA47 /* FMResultSet.m */,
+			);
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -672,11 +741,14 @@
 				9C3790381AD4B8BD0009528F /* XMPPJID.m in Sources */,
 				9C758E691AD113F4005EBEAE /* ViewController.m in Sources */,
 				9C37903E1AD4B8BD0009528F /* DDList.m in Sources */,
+				9CD21E011AD55F59004FDA47 /* TdStudent.m in Sources */,
+				9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */,
 				9C378FD81AD4B6A20009528F /* DDXMLDocument.m in Sources */,
 				9C378FC51AD4B62C0009528F /* GCDAsyncSocket.m in Sources */,
 				9C3790331AD4B8BD0009528F /* NSNumber+XMPP.m in Sources */,
 				9C378F9C1AD4B5860009528F /* DDTTYLogger.m in Sources */,
 				9C37902D1AD4B8BD0009528F /* XMPPDigestMD5Authentication.m in Sources */,
+				9CD21E141AD56381004FDA47 /* FMDatabasePool.m in Sources */,
 				9C3790371AD4B8BD0009528F /* XMPPIQ.m in Sources */,
 				9C37903B1AD4B8BD0009528F /* XMPPParser.m in Sources */,
 				9C37902F1AD4B8BD0009528F /* XMPPSCRAMSHA1Authentication.m in Sources */,
@@ -689,15 +761,19 @@
 				9C378F981AD4B5860009528F /* DDAbstractDatabaseLogger.m in Sources */,
 				9C758E661AD113F4005EBEAE /* AppDelegate.m in Sources */,
 				9C378F9F1AD4B5860009528F /* DDMultiFormatter.m in Sources */,
+				9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */,
 				9C3790301AD4B8BD0009528F /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				9C3790321AD4B8BD0009528F /* NSData+XMPP.m in Sources */,
 				9C378F231AD4B1C30009528F /* TestXmpp.m in Sources */,
 				9C378F9B1AD4B5860009528F /* DDLog.m in Sources */,
+				9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */,
+				9CD21E161AD56381004FDA47 /* FMResultSet.m in Sources */,
 				9C378F991AD4B5860009528F /* DDASLLogger.m in Sources */,
 				9C3790401AD4B8BD0009528F /* RFImageToDataTransformer.m in Sources */,
 				9C37902B1AD4B8BD0009528F /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				9C37903F1AD4B8BD0009528F /* GCDMulticastDelegate.m in Sources */,
 				9C378FDA1AD4B6A20009528F /* DDXMLNode.m in Sources */,
+				9CD21E151AD56381004FDA47 /* FMDatabaseQueue.m in Sources */,
 				9C378FD91AD4B6A20009528F /* DDXMLElement.m in Sources */,
 				9C3790431AD4B8BD0009528F /* XMPPStringPrep.m in Sources */,
 				9C37902C1AD4B8BD0009528F /* XMPPDeprecatedPlainAuthentication.m in Sources */,
@@ -712,6 +788,8 @@
 				9C3790311AD4B8BD0009528F /* XMPPXOAuth2Google.m in Sources */,
 				9C378F9E1AD4B5860009528F /* DDDispatchQueueLogFormatter.m in Sources */,
 				9C378FD71AD4B6A20009528F /* NSString+DDXML.m in Sources */,
+				9CD21E1F1AD567B3004FDA47 /* TdMessageUnion.m in Sources */,
+				9CD21E1B1AD56504004FDA47 /* TdMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,6 +911,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MolurenSchool/Prefix.h";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -853,6 +932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MolurenSchool/Prefix.h";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
