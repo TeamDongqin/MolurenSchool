@@ -62,7 +62,6 @@
 		9C758E7D1AD113F4005EBEAE /* MolurenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */; };
 		9C758E8A1AD1154B005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E891AD1154B005EBEAE /* Setting */; };
 		9C758E8C1AD11575005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E8B1AD11575005EBEAE /* Setting */; };
-		9C758E941AD11651005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E931AD11651005EBEAE /* Setting */; };
 		9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E041AD55F8F004FDA47 /* CommonSetting.m */; };
 		9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E091AD56381004FDA47 /* FMDatabase.m */; };
 		9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */; };
@@ -205,7 +204,6 @@
 		9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MolurenSchoolTests.m; sourceTree = "<group>"; };
 		9C758E891AD1154B005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9C758E8B1AD11575005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
-		9C758E931AD11651005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9CD21E031AD55F8F004FDA47 /* CommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSetting.h; sourceTree = "<group>"; };
 		9CD21E041AD55F8F004FDA47 /* CommonSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSetting.m; sourceTree = "<group>"; };
 		9CD21E061AD56136004FDA47 /* Prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.h; sourceTree = "<group>"; };
@@ -621,7 +619,6 @@
 		9C758E921AD11651005EBEAE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9C758E931AD11651005EBEAE /* Setting */,
 				9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */,
 				9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */,
 			);
@@ -782,7 +779,6 @@
 				9C758E6C1AD113F4005EBEAE /* Main.storyboard in Resources */,
 				9C758E8A1AD1154B005EBEAE /* Setting in Resources */,
 				9C758E711AD113F4005EBEAE /* LaunchScreen.xib in Resources */,
-				9C758E941AD11651005EBEAE /* Setting in Resources */,
 				9C758E6E1AD113F4005EBEAE /* Images.xcassets in Resources */,
 				9C378FA01AD4B5860009528F /* README.txt in Resources */,
 				9C758E8C1AD11575005EBEAE /* Setting in Resources */,

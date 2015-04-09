@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TdMsgListViewController : UIViewController
+@interface TdMsgListViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *_msgArr;
+    UITableView *_messageTable;
+}
 
 @end

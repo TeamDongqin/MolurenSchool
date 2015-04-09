@@ -52,5 +52,9 @@ enum TdMessageCellStyle {
     kWCMessageCellStyleOtherWithImage=3
 };
 
+// Device parameters
+#define Device_Width [[UIScreen mainScreen] bounds].size.width
+#define Device_Height [[UIScreen mainScreen] bounds].size.height
+
 
 #endif
