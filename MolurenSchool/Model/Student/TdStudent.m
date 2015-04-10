@@ -9,6 +9,7 @@
 #import "TdStudent.h"
 #import "FMDatabase.h"
 #import "FMResultSet.h"
+#import "TdChatDBManager.h"
 
 @implementation TdStudent
 @synthesize userDescription,userHead,userId,userNickname,friendFlag;
@@ -17,7 +18,7 @@
 {
     
     
-    FMDatabase *db = [FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db = [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据库打开失败");
         return NO;
@@ -42,7 +43,7 @@
 +(BOOL)haveSaveUserById:(NSString*)userId
 {
     
-    FMDatabase *db = [FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db = [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据库打开失败");
         return YES;
@@ -75,7 +76,7 @@
 +(BOOL)updateUser:(TdStudent*)newUser
 {
     
-    FMDatabase *db = [FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db = [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据库打开失败");
         return NO;
@@ -91,7 +92,7 @@
 {
     NSMutableArray *resultArr=[[NSMutableArray alloc]init];
     
-    FMDatabase *db = [FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db = [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据库打开失败");
         return resultArr;

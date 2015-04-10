@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FMDatabase.h"
+#import "FMResultSet.h"
 
 @interface TdChatDBManager : NSObject
+
+@property (strong, atomic) FMDatabase* TdDataBaseMgr;
+
++ (TdChatDBManager*)Instance;
+
+-(FMDatabase*)Init;
 
 @end

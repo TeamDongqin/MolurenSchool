@@ -11,6 +11,7 @@
 #import "FMResultSet.h"
 #import "TdStudent.h"
 #import "TdMessageUnion.h"
+#import "TdChatDBManager.h"
 
 @implementation TdMessage
 
@@ -83,7 +84,7 @@
 {
     NSMutableArray *messageList=[[NSMutableArray alloc]init];
     
-    FMDatabase *db=[FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db= [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据打开失败");
         return messageList;
@@ -112,7 +113,7 @@
 {
     NSMutableArray *messageList=[[NSMutableArray alloc]init];
     
-    FMDatabase *db=[FMDatabase databaseWithPath:DATABASE_PATH];
+    FMDatabase *db= [[TdChatDBManager Instance] Init];
     if (![db open]) {
         NSLog(@"数据打开失败");
         return messageList;

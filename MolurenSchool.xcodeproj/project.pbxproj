@@ -79,6 +79,7 @@
 		9CD7BB661AD6093000322380 /* RZImageDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CD7BB621AD6093000322380 /* RZImageDisplay.xib */; };
 		9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */; };
 		9CD7BB6A1AD60A3D00322380 /* TdMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */; };
+		9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,9 @@
 		9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RZWebImage.m"; sourceTree = "<group>"; };
 		9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListViewController.h; sourceTree = "<group>"; };
 		9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListViewController.m; sourceTree = "<group>"; };
+		9CDB38FC1AD75A9E00024391 /* TdServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerManager.h; sourceTree = "<group>"; };
+		9CDB38FD1AD75A9E00024391 /* TdServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerManager.m; sourceTree = "<group>"; };
+		9CDB38FF1AD75C2700024391 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +369,7 @@
 		9C378FE21AD4B8BD0009528F /* XmppFramework */ = {
 			isa = PBXGroup;
 			children = (
+				9CDB38FF1AD75C2700024391 /* XMPPFramework.h */,
 				9C378FE31AD4B8BD0009528F /* Authentication */,
 				9C378FFE1AD4B8BD0009528F /* Categories */,
 				9C3790051AD4B8BD0009528F /* Core */,
@@ -664,6 +669,8 @@
 		9CD7BB4B1AD6041300322380 /* OpenfireServer */ = {
 			isa = PBXGroup;
 			children = (
+				9CDB38FC1AD75A9E00024391 /* TdServerManager.h */,
+				9CDB38FD1AD75A9E00024391 /* TdServerManager.m */,
 			);
 			path = OpenfireServer;
 			sourceTree = "<group>";
@@ -853,6 +860,7 @@
 				9C3790361AD4B8BD0009528F /* XMPPElement.m in Sources */,
 				9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */,
 				9C37902E1AD4B8BD0009528F /* XMPPPlainAuthentication.m in Sources */,
+				9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */,
 				9C3790311AD4B8BD0009528F /* XMPPXOAuth2Google.m in Sources */,
 				9C378F9E1AD4B5860009528F /* DDDispatchQueueLogFormatter.m in Sources */,
 				9C378FD71AD4B6A20009528F /* NSString+DDXML.m in Sources */,

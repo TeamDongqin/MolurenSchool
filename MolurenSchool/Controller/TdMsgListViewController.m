@@ -91,10 +91,15 @@
 
 -(void)FillData{
     
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    
     TdMessage *message=[[TdMessage alloc]init];
     [message setMessageId:0];
     [message setMessageContent:@"Test"];
-    [message setMessageDate:[[NSData alloc] init]];
+    [message setMessageDate:currDate];
     [message setMessageFrom:@"TestFrom"];
     [message setMessageTo:@"TestTo"];
     [message setMessageType:0];

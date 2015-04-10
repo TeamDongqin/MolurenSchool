@@ -24,6 +24,10 @@
 #define CELL_HEIGHT self.contentView.frame.size.height
 #define CELL_WIDTH self.contentView.frame.size.width
 
+// Xmpp server
+#define DOCUMENT_PATH NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]
+#define CACHES_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
+
 @interface CommonSetting : NSObject
 
 @end
