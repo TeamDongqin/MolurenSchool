@@ -79,6 +79,7 @@
 		9CD7BB661AD6093000322380 /* RZImageDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CD7BB621AD6093000322380 /* RZImageDisplay.xib */; };
 		9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */; };
 		9CD7BB6A1AD60A3D00322380 /* TdMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */; };
+		9CD8CBAC1ADA21F000E8DA23 /* TdFindFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CBAB1ADA21F000E8DA23 /* TdFindFriendViewController.m */; };
 		9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerManager.m */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +240,8 @@
 		9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RZWebImage.m"; sourceTree = "<group>"; };
 		9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListViewController.h; sourceTree = "<group>"; };
 		9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListViewController.m; sourceTree = "<group>"; };
+		9CD8CBAA1ADA21F000E8DA23 /* TdFindFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdFindFriendViewController.h; sourceTree = "<group>"; };
+		9CD8CBAB1ADA21F000E8DA23 /* TdFindFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdFindFriendViewController.m; sourceTree = "<group>"; };
 		9CDB38FC1AD75A9E00024391 /* TdServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerManager.h; sourceTree = "<group>"; };
 		9CDB38FD1AD75A9E00024391 /* TdServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerManager.m; sourceTree = "<group>"; };
 		9CDB38FF1AD75C2700024391 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 			children = (
 				9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */,
 				9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */,
+				9CD8CBAA1ADA21F000E8DA23 /* TdFindFriendViewController.h */,
+				9CD8CBAB1ADA21F000E8DA23 /* TdFindFriendViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -841,6 +846,7 @@
 				9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */,
 				9CD21E161AD56381004FDA47 /* FMResultSet.m in Sources */,
 				9C378F991AD4B5860009528F /* DDASLLogger.m in Sources */,
+				9CD8CBAC1ADA21F000E8DA23 /* TdFindFriendViewController.m in Sources */,
 				9C3790401AD4B8BD0009528F /* RFImageToDataTransformer.m in Sources */,
 				9C37902B1AD4B8BD0009528F /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				9C37903F1AD4B8BD0009528F /* GCDMulticastDelegate.m in Sources */,
