@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #if !TARGET_OS_IPHONE
   #import <Cocoa/Cocoa.h>
@@ -8,8 +9,11 @@
 #import "XMPPUser.h"
 #import "XMPPResource.h"
 
+#define _XMPP_ROSTER_H
+
 @protocol XMPPRosterStorage;
 @class DDList;
+@class XMPPIDTracker;
 
 /**
  * The XMPPRoster provides the scaffolding for a roster solution.
@@ -39,6 +43,8 @@
 	id multicastDelegate;
  */
 	__strong id <XMPPRosterStorage> xmppRosterStorage;
+    
+    XMPPIDTracker *xmppIDTracker;
 	
 	Byte config;
 	Byte flags;
@@ -74,6 +80,16 @@
  * The default value is YES.
 **/
 @property (assign) BOOL autoFetchRoster;
+
+/**
+ * Whether or not to automatically clear all Users and Resources when the stream disconnects.
+ * If you are using XMPPRosterCoreDataStorage you may want to set autoRemovePreviousDatabaseFile to NO.
+ *
+ * All Users and Resources will be cleared when the roster is next populated regardless of this property.
+ *
+ * The default value is YES.
+**/
+@property (assign) BOOL autoClearAllUsersAndResources;
 
 /**
  * In traditional IM applications, the "buddy" system is rather straightforward.
@@ -133,15 +149,48 @@
 @property (assign) BOOL allowRosterlessOperation;
 
 /**
+ * The roster has either been requested manually (fetchRoster:)
+ * or automatically (autoFetchRoster) but has yet to be populated.
+**/
+@property (assign, getter = hasRequestedRoster, readonly) BOOL requestedRoster;
+
+/**
+ * The initial roster has been received by client and is currently being populated.
+ * @see xmppRosterDidBeginPopulating:
+ * @see xmppRosterDidEndPopulating:
+**/
+@property (assign, getter = isPopulating, readonly) BOOL populating;
+
+/**
+ * The initial roster has been received by client and populated.
+**/
+@property (assign, readonly) BOOL hasRoster;
+
+/**
  * Manually fetch the roster from the server.
  * Useful if you disable autoFetchRoster.
 **/
 - (void)fetchRoster;
 
 /**
- * Adds the given user to the roster and requests permission to receive presence information from them.
+ * Adds the given user to the roster with an optional nickname 
+ * and requests permission to receive presence information from them.
 **/
 - (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName;
+
+/**
+ * Adds the given user to the roster with an optional nickname, 
+ * adds the given user to groups
+ * and requests permission to receive presence information from them.
+**/
+- (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName groups:(NSArray *)groups;
+
+/**
+ * Adds the given user to the roster with an optional nickname,
+ * adds the given user to groups
+ * and optionally requests permission to receive presence information from them.
+**/
+- (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName groups:(NSArray *)groups subscribeToPresence:(BOOL)subscribe;
 
 /**
  * Sets/modifies the nickname for the given user.
@@ -283,6 +332,15 @@
 - (void)clearAllResourcesForXMPPStream:(XMPPStream *)stream;
 - (void)clearAllUsersAndResourcesForXMPPStream:(XMPPStream *)stream;
 
+- (NSArray *)jidsForXMPPStream:(XMPPStream *)stream;
+
+- (void)getSubscription:(NSString **)subscription
+                    ask:(NSString **)ask
+               nickname:(NSString **)nickname
+                 groups:(NSArray **)groups
+                 forJID:(XMPPJID *)jid
+             xmppStream:(XMPPStream *)stream;
+
 @optional
 
 /**
@@ -316,5 +374,31 @@
  * be used to respond to the request.
 **/
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence;
+
+/**
+ * Sent when a Roster Push is received as specified in Section 2.1.6 of RFC 6121.
+**/
+- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterPush:(XMPPIQ *)iq;
+
+/**
+ * Sent when the initial roster is received.
+**/
+- (void)xmppRosterDidBeginPopulating:(XMPPRoster *)sender;
+
+/**
+ * Sent when the initial roster has been populated into storage.
+**/
+- (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender;
+
+/**
+ * Sent when the roster receives a roster item.
+ *
+ * Example:
+ *
+ * <item jid='romeo@example.net' name='Romeo' subscription='both'>
+ *   <group>Friends</group>
+ * </item>
+**/
+- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(NSXMLElement *)item;
 
 @end

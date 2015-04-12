@@ -1,37 +1,11 @@
 #import "XMPPRoomMemoryStorage.h"
 #import "XMPPRoomPrivate.h"
 #import "XMPP.h"
-#import "XMPPElement+Delay.h"
+#import "NSXMLElement+XEP_0203.h"
 #import "XMPPLogging.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-#endif
-
-/**
- * Does ARC support support GCD objects?
- * It does if the minimum deployment target is iOS 6+ or Mac OS X 10.8+
-**/
-#if TARGET_OS_IPHONE
-
-  // Compiling for iOS
-
-  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else                                         // iOS 5.X or earlier
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
-  #endif
-
-#else
-
-  // Compiling for Mac OS X
-
-  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
-  #endif
-
 #endif
 
 // Log levels: off, error, warn, info, verbose
@@ -42,10 +16,10 @@
 #endif
 
 #define AssertPrivateQueue() \
-        NSAssert(dispatch_get_current_queue() == parentQueue, @"Private method: MUST run on parentQueue");
+        NSAssert(dispatch_get_specific(parentQueueTag), @"Private method: MUST run on parentQueue");
 
 #define AssertParentQueue() \
-        NSAssert(dispatch_get_current_queue() == parentQueue, @"Private protocol method: MUST run on parentQueue");
+        NSAssert(dispatch_get_specific(parentQueueTag), @"Private protocol method: MUST run on parentQueue");
 
 @interface XMPPRoomMemoryStorage ()
 {
@@ -55,6 +29,7 @@
 	__unsafe_unretained XMPPRoom *parent;
   #endif
 	dispatch_queue_t parentQueue;
+	void *parentQueueTag;
 	
 	NSMutableArray * messages;
 	NSMutableArray * occupantsArray;
@@ -101,8 +76,10 @@
 		{
 			parent = aParent;
 			parentQueue = queue;
+			parentQueueTag = &parentQueueTag;
+			dispatch_queue_set_specific(parentQueue, parentQueueTag, parentQueueTag, NULL);
 			
-			#if NEEDS_DISPATCH_RETAIN_RELEASE
+			#if !OS_OBJECT_USE_OBJC
 			dispatch_retain(parentQueue);
 			#endif
 			
@@ -120,7 +97,7 @@
 
 - (void)dealloc
 {
-	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	#if !OS_OBJECT_USE_OBJC
 	if (parentQueue)
 		dispatch_release(parentQueue);
 	#endif
@@ -225,7 +202,7 @@
 	while (YES)
 	{
 		mid = (min + max) / 2;
-		XMPPRoomMessageMemoryStorageObject *currentMessage = [messages objectAtIndex:mid];
+		XMPPRoomMessageMemoryStorageObject *currentMessage = messages[mid];
 		
 		NSComparisonResult cmp = [minLocalTimestamp compare:[currentMessage localTimestamp]];
 		if (cmp == NSOrderedAscending)
@@ -263,7 +240,7 @@
 	NSInteger index;
 	for (index = mid; index < [messages count]; index++)
 	{
-		XMPPRoomMessageMemoryStorageObject *currentMessage = [messages objectAtIndex:index];
+		XMPPRoomMessageMemoryStorageObject *currentMessage = messages[index];
 		
 		NSComparisonResult cmp = [maxLocalTimestamp compare:[currentMessage localTimestamp]];
 		if (cmp != NSOrderedAscending)
@@ -319,7 +296,7 @@
 	
 	// Shortcut - Most (if not all) messages are inserted at the end
 	
-	XMPPRoomMessageMemoryStorageObject *lastMessage = [messages objectAtIndex:(count - 1)];
+	XMPPRoomMessageMemoryStorageObject *lastMessage = messages[count - 1];
 	if ([message compare:lastMessage] != NSOrderedAscending)
 	{
 		[messages addObject:message];
@@ -336,7 +313,7 @@
 	while (YES)
 	{
 		mid = (min + max) / 2;
-		XMPPRoomMessageMemoryStorageObject *currentMessage = [messages objectAtIndex:mid];
+		XMPPRoomMessageMemoryStorageObject *currentMessage = messages[mid];
 		
 		NSComparisonResult cmp = [message compare:currentMessage];
 		if (cmp == NSOrderedAscending)
@@ -392,7 +369,7 @@
 {
 	NSUInteger index = [self insertMessage:roomMsg];
 	
-	XMPPRoomOccupantMemoryStorageObject *occupant = [occupantsDict objectForKey:[roomMsg jid]];
+	XMPPRoomOccupantMemoryStorageObject *occupant = occupantsDict[[roomMsg jid]];
 	
 	XMPPRoomMessageMemoryStorageObject *roomMsgCopy = [roomMsg copy];
 	XMPPRoomOccupantMemoryStorageObject *occupantCopy = [occupant copy];
@@ -424,7 +401,7 @@
 	while (YES)
 	{
 		mid = (min + max) / 2;
-		XMPPRoomOccupantMemoryStorageObject *currentOccupant = [occupantsArray objectAtIndex:mid];
+		XMPPRoomOccupantMemoryStorageObject *currentOccupant = occupantsArray[mid];
 		
 		NSComparisonResult cmp = [occupant compare:currentOccupant];
 		if (cmp == NSOrderedAscending)
@@ -468,9 +445,9 @@
 		return nil;
 	}
 	
-	if (dispatch_get_current_queue() == parentQueue)
+	if (dispatch_get_specific(parentQueueTag))
 	{
-		return [occupantsDict objectForKey:jid];
+		return occupantsDict[jid];
 	}
 	else
 	{
@@ -478,7 +455,7 @@
 		
 		dispatch_sync(parentQueue, ^{ @autoreleasepool {
 			
-			occupant = [[occupantsDict objectForKey:jid] copy];
+			occupant = [occupantsDict[jid] copy];
 		}});
 		
 		return occupant;
@@ -495,7 +472,7 @@
 		return nil;
 	}
 	
-	if (dispatch_get_current_queue() == parentQueue)
+	if (dispatch_get_specific(parentQueueTag))
 	{
 		return messages;
 	}
@@ -522,7 +499,7 @@
 		return nil;
 	}
 	
-	if (dispatch_get_current_queue() == parentQueue)
+	if (dispatch_get_specific(parentQueueTag))
 	{
 		return occupantsArray;
 	}
@@ -549,7 +526,7 @@
 		return nil;
 	}
 	
-	if (dispatch_get_current_queue() == parentQueue)
+	if (dispatch_get_specific(parentQueueTag))
 	{
 		[messages sortUsingSelector:@selector(compare:)];
 		return messages;
@@ -578,7 +555,7 @@
 		return nil;
 	}
 	
-	if (dispatch_get_current_queue() == parentQueue)
+	if (dispatch_get_specific(parentQueueTag))
 	{
 		[occupantsArray sortUsingSelector:@selector(compare:)];
 		return occupantsArray;
@@ -610,7 +587,7 @@
 	
 	if ([[presence type] isEqualToString:@"unavailable"])
 	{
-		XMPPRoomOccupantMemoryStorageObject *occupant = [occupantsDict objectForKey:from];
+		XMPPRoomOccupantMemoryStorageObject *occupant = occupantsDict[from];
 		if (occupant)
 		{
 			// Occupant did leave - remove
@@ -633,7 +610,7 @@
 	}
 	else
 	{
-		XMPPRoomOccupantMemoryStorageObject *occupant = [occupantsDict objectForKey:from];
+		XMPPRoomOccupantMemoryStorageObject *occupant = occupantsDict[from];
 		if (occupant == nil)
 		{
 			// Occupant did join - add
@@ -641,7 +618,7 @@
 			occupant = [[self.occupantClass alloc] initWithPresence:presence];
 			
 			NSUInteger index = [self insertOccupant:occupant];
-			[occupantsDict setObject:occupant forKey:from];
+			occupantsDict[from] = occupant;
 			
 			// Notify delegate(s)
 			
@@ -695,9 +672,10 @@
 	XMPPLogTrace();
 	AssertParentQueue();
 	
-	XMPPJID *msgJID = [message from];
+	XMPPJID *myRoomJID = room.myRoomJID;
+	XMPPJID *messageJID = [message from];
 	
-	if ([room.myRoomJID isEqualToJID:msgJID])
+	if ([myRoomJID isEqualToJID:messageJID])
 	{
 		if (![message wasDelayed])
 		{

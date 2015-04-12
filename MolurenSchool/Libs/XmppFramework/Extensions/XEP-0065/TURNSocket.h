@@ -17,6 +17,7 @@
 	BOOL isClient;
 	
 	dispatch_queue_t turnQueue;
+	void *turnQueueTag;
 	
 	XMPPStream *xmppStream;
 	XMPPJID *jid;
@@ -76,3 +77,4 @@
 - (void)turnSocketDidFail:(TURNSocket *)sender;
 
 @end
+

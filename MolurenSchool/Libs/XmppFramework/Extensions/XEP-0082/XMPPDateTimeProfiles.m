@@ -5,6 +5,8 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
+static NSString * const kXEP0082SharedDateFormatterKey = @"xep0082_shared_date_formatter_key";
+
 @interface XMPPDateTimeProfiles (PrivateAPI)
 + (NSDate *)parseDateTime:(NSString *)dateTimeStr withMandatoryTimeZone:(BOOL)mandatoryTZ;
 @end
@@ -43,8 +45,9 @@
 	// 
 	// 1776-07-04
 	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	NSDateFormatter *df = [self threadDateFormatter];
 	[df setFormatterBehavior:NSDateFormatterBehavior10_4]; // Use unicode patterns (as opposed to 10_3)
+    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
 	[df setDateFormat:@"yyyy-MM-dd"];
 	
 	NSDate *result = [df dateFromString:dateStr];
@@ -82,8 +85,9 @@
 	// For example, -0800 instead of the current -0700.
 	// This can be rather confusing when printing the result.
 	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	NSDateFormatter *df = [self threadDateFormatter];
 	[df setFormatterBehavior:NSDateFormatterBehavior10_4]; // Use unicode patterns (as opposed to 10_3)
+    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
 	[df setDateFormat:@"yyyy-MM-dd"];
 	
 	NSString *today = [df stringFromDate:[NSDate date]];
@@ -135,6 +139,7 @@
 	BOOL hasMilliseconds = NO;
 	BOOL hasTimeZoneInfo = NO;
 	BOOL hasTimeZoneOffset = NO;
+	NSInteger fractionalDigits = 0;
 	
 	if ([dateTimeStr length] > 19)
 	{
@@ -144,108 +149,94 @@
 		if (c == '.')
 		{
 			hasMilliseconds = YES;
-			
-			if ([dateTimeStr length] < 23) return nil;
-			
-			if ([dateTimeStr length] > 23)
-			{
-				c = [dateTimeStr characterAtIndex:23];
-			}
+
+			// At least one fractional digit?
+			if ([dateTimeStr length] < 21) return nil;
 		}
 		
-		// Check for optional time zone info
-		if (c == 'Z')
+		// Check for optional time zone info, which is at the last char (Z), or the
+		// char 6 chars from the end
+		if ([dateTimeStr characterAtIndex:[dateTimeStr length] - 1] == 'Z')
 		{
 			hasTimeZoneInfo = YES;
 			hasTimeZoneOffset = NO;
-		}
-		else if (c == '+' || c == '-')
-		{
-			hasTimeZoneInfo = YES;
-			hasTimeZoneOffset = YES;
-			
 			if (hasMilliseconds)
 			{
-				if ([dateTimeStr length] < 29) return nil;
+				// 1969-07-21T02:56:15.1234Z -> 25 - 1 - 20 = 4
+				fractionalDigits = [dateTimeStr length] - 1 - 20;
 			}
-			else
+		}
+		else
+		{
+			c = [dateTimeStr characterAtIndex:[dateTimeStr length] - 6];
+			if (c == '+' || c == '-')
 			{
-				if ([dateTimeStr length] < 25) return nil;
+				hasTimeZoneInfo = YES;
+				hasTimeZoneOffset = YES;
+				if (hasMilliseconds)
+				{
+					// 1969-07-21T02:56:15.1234+00:00 -> 30 - 6 - 20 = 4
+					fractionalDigits = [dateTimeStr length] - 6 - 20;
+				}
+			}
+			else if (hasMilliseconds)
+			{
+				// 1969-07-21T02:56:15.1234 -> 24 - 20 = 4
+				fractionalDigits = [dateTimeStr length] - 20;
 			}
 		}
 	}
 	
 	if (mandatoryTZ && !hasTimeZoneInfo) return nil;
 	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+	NSDateFormatter *df = [self threadDateFormatter];
 	[df setFormatterBehavior:NSDateFormatterBehavior10_4]; // Use unicode patterns (as opposed to 10_3)
-	
-	if (hasMilliseconds)
-	{
-		if (hasTimeZoneInfo)
-		{
-			if (hasTimeZoneOffset)
-				[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"]; // Offset calculated separately
-			else
-				[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-		}
-		else
-		{
-			[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
-		}
-	}
-	else if (hasTimeZoneInfo)
-	{
-		if (hasTimeZoneOffset)
-			[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"]; // Offset calculated separately
-		else
-			[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-	}
-	else
-	{
-		[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
-	}
-	
-	NSDate *result;
-	
+    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+	[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+
+	NSDate *result = nil;
+	NSString *dateAndTime = [dateTimeStr substringToIndex:19];
+	NSString *fraction = fractionalDigits != 0 ? [NSString stringWithFormat:@"0%@", [dateTimeStr substringWithRange:NSMakeRange(19, fractionalDigits + 1)]] : nil;
+
 	if (hasTimeZoneInfo && !hasTimeZoneOffset)
 	{
 		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-		
-		result = [df dateFromString:dateTimeStr];
+		result = [df dateFromString:dateAndTime];
 	}
 	else if (hasTimeZoneInfo && hasTimeZoneOffset)
 	{
-		NSString *dto;
-		NSString *tzo;
-		
-		if (hasMilliseconds)
-		{
-			dto = [dateTimeStr substringToIndex:23];
-			tzo = [dateTimeStr substringFromIndex:23];
-		}
-		else
-		{
-			dto = [dateTimeStr substringToIndex:19];
-			tzo = [dateTimeStr substringFromIndex:19];
-		}
-		
-		NSTimeZone *timeZone = [self parseTimeZoneOffset:tzo];
-		if (timeZone == nil)
+		NSString *timeZone = [dateTimeStr substringFromIndex:[dateTimeStr length] - 6];
+		NSTimeZone *tz = [self parseTimeZoneOffset:timeZone];
+		if (tz == nil)
 		{
 			result = nil;
 		}
 		else
 		{
-			[df setTimeZone:timeZone];
-			result = [df dateFromString:dto];
+			[df setTimeZone:tz];
+			result = [df dateFromString:dateAndTime];
 		}
 	}
 	else
 	{
-		result = [df dateFromString:dateTimeStr];
+		result = [df dateFromString:dateAndTime];
 	}
-	
+
+	if (result && fraction)
+	{
+		static NSNumberFormatter *numberFormatter = nil;
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			numberFormatter = [[NSNumberFormatter alloc] init];
+			[numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+			[numberFormatter setDecimalSeparator:@"."];
+		});
+
+		NSTimeInterval fractionInterval = [[numberFormatter numberFromString:fraction] doubleValue];
+		NSTimeInterval current = [result timeIntervalSinceReferenceDate];
+		result = [NSDate dateWithTimeIntervalSinceReferenceDate:floor(current) + fractionInterval];
+	}
+
 	return result;
 }
 
@@ -266,11 +257,11 @@
 	NSString *minutesStr = [tzo substringWithRange:NSMakeRange(4, 2)];
 	
 	NSUInteger hours;
-	if (![NSNumber parseString:hoursStr intoNSUInteger:&hours])
+	if (![NSNumber xmpp_parseString:hoursStr intoNSUInteger:&hours])
 		return nil;
 	
 	NSUInteger minutes;
-	if (![NSNumber parseString:minutesStr intoNSUInteger:&minutes])
+	if (![NSNumber xmpp_parseString:minutesStr intoNSUInteger:&minutes])
 		return nil;
 	
 	if (hours > 23) return nil;
@@ -288,6 +279,17 @@
 	}
 	
 	return [NSTimeZone timeZoneForSecondsFromGMT:secondsOffset];
+}
+
++ (NSDateFormatter *)threadDateFormatter {
+  NSMutableDictionary *currentThreadStorage = [[NSThread currentThread] threadDictionary];
+  NSDateFormatter *sharedDateFormatter = currentThreadStorage[kXEP0082SharedDateFormatterKey];
+  if (!sharedDateFormatter) {
+    sharedDateFormatter = [NSDateFormatter new];
+    currentThreadStorage[kXEP0082SharedDateFormatterKey] = sharedDateFormatter;
+  }
+  
+  return sharedDateFormatter;
 }
 
 @end

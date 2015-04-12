@@ -1,5 +1,5 @@
 #import "XMPP.h"
-#import "XMPPElement+Delay.h"
+#import "NSXMLElement+XEP_0203.h"
 #import "XMPPRosterMemoryStoragePrivate.h"
 
 #if ! __has_feature(objc_arc)
@@ -63,9 +63,19 @@
 	{
 		if([coder allowsKeyedCoding])
 		{
-			jid          = [coder decodeObjectForKey:@"jid"];
-			presence     = [coder decodeObjectForKey:@"presence"];
-			presenceDate = [coder decodeObjectForKey:@"presenceDate"];
+            if([coder respondsToSelector:@selector(requiresSecureCoding)] &&
+               [coder requiresSecureCoding])
+            {
+                jid          = [coder decodeObjectOfClass:[XMPPJID class] forKey:@"jid"];
+                presence     = [coder decodeObjectOfClass:[XMPPPresence class] forKey:@"presence"];
+                presenceDate = [coder decodeObjectOfClass:[NSDate class] forKey:@"presenceDate"];
+            }
+            else
+            {
+                jid          = [coder decodeObjectForKey:@"jid"];
+                presence     = [coder decodeObjectForKey:@"presence"];
+                presenceDate = [coder decodeObjectForKey:@"presenceDate"];
+            }
 		}
 		else
 		{
@@ -91,6 +101,11 @@
 		[coder encodeObject:presence];
 		[coder encodeObject:presenceDate];
 	}
+}
+
++ (BOOL) supportsSecureCoding
+{
+    return YES;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

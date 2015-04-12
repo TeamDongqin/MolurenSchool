@@ -1,7 +1,7 @@
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "XMPPCoreDataStorageProtected.h"
 #import "XMPPLogging.h"
-#import "XMPPElement+Delay.h"
+#import "NSXMLElement+XEP_0203.h"
 #import "XMPPMessage+XEP_0085.h"
 
 #if ! __has_feature(objc_arc)
@@ -32,12 +32,12 @@
 
 static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 
-+ (XMPPMessageArchivingCoreDataStorage *)sharedInstance
++ (instancetype)sharedInstance
 {
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		
-		sharedInstance = [[XMPPMessageArchivingCoreDataStorage alloc] initWithDatabaseFilename:nil];
+		sharedInstance = [[XMPPMessageArchivingCoreDataStorage alloc] initWithDatabaseFilename:nil storeOptions:nil];
 	});
 	
 	return sharedInstance;
@@ -166,20 +166,21 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 	
 	NSString *predicateFrmt = @"composing == YES AND bareJidStr == %@ AND outgoing == %@ AND streamBareJidStr == %@";
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateFrmt,
-	                             [messageJid bare], [NSNumber numberWithBool:isOutgoing], [streamJid bare]];
+                                                            [messageJid bare], @(isOutgoing),
+                                                            [streamJid bare]];
 	
 	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
 	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	fetchRequest.entity = messageEntity;
 	fetchRequest.predicate = predicate;
-	fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+	fetchRequest.sortDescriptors = @[sortDescriptor];
 	fetchRequest.fetchLimit = 1;
 	
 	NSError *error = nil;
 	NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
 	
-	if (results == nil)
+	if (results == nil || error)
 	{
 		XMPPLogError(@"%@: %@ - Error executing fetchRequest: %@", THIS_FILE, THIS_METHOD, fetchRequest);
 	}
@@ -257,7 +258,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 		result = messageEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -271,7 +272,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 		messageEntityName = entityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -285,7 +286,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 		result = contactEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -299,7 +300,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 		contactEntityName = entityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -343,7 +344,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 		// Message doesn't have a body.
 		// Check to see if it has a chat state (composing, paused, etc).
 		
-		isComposing = [message isComposingChatState];
+		isComposing = [message hasComposingChatState];
 		if (!isComposing)
 		{
 			if ([message hasChatState])
@@ -460,7 +461,7 @@ static XMPPMessageArchivingCoreDataStorage *sharedInstance;
 					
 				contact.mostRecentMessageTimestamp = archivedMessage.timestamp;
 				contact.mostRecentMessageBody = archivedMessage.body;
-				contact.mostRecentMessageOutgoing = [NSNumber numberWithBool:isOutgoing];
+				contact.mostRecentMessageOutgoing = @(isOutgoing);
 				
 				XMPPLogVerbose(@"New contact: %@", contact);
 				
