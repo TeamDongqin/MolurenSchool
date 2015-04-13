@@ -30,4 +30,8 @@
 
 @interface CommonSetting : NSObject
 
+// Chat advanced feature view
+#define CHAT_BUTTON_SIZE 70
+#define INSETS 10
+
 @end
