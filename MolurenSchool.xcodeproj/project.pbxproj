@@ -68,16 +68,21 @@
 		9CD21E151AD56381004FDA47 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0F1AD56381004FDA47 /* FMDatabaseQueue.m */; };
 		9CD21E161AD56381004FDA47 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E111AD56381004FDA47 /* FMResultSet.m */; };
 		9CD21E181AD564C0004FDA47 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD21E171AD564C0004FDA47 /* libsqlite3.0.dylib */; };
+		9CD2287A1ADBEED5006BD201 /* TdAdvancedChatFeatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228761ADBEED5006BD201 /* TdAdvancedChatFeatureView.m */; };
+		9CD2287B1ADBEED5006BD201 /* TdMsgListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228781ADBEED5006BD201 /* TdMsgListCell.m */; };
+		9CD228811ADBEF35006BD201 /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 9CD228801ADBEF35006BD201 /* Readme */; };
+		9CD228841ADBEF45006BD201 /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 9CD228831ADBEF45006BD201 /* Readme */; };
+		9CD2288C1ADBEF55006BD201 /* TdChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228871ADBEF55006BD201 /* TdChatViewController.m */; };
+		9CD2288D1ADBEF55006BD201 /* TdMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228891ADBEF55006BD201 /* TdMsgListViewController.m */; };
+		9CD2288E1ADBEF55006BD201 /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 9CD2288B1ADBEF55006BD201 /* Readme */; };
 		9CD7BB551AD6041300322380 /* TdFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB4E1AD6041300322380 /* TdFriend.m */; };
 		9CD7BB561AD6041300322380 /* TdMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB501AD6041300322380 /* TdMessage.m */; };
 		9CD7BB571AD6041300322380 /* TdMessageUnion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB521AD6041300322380 /* TdMessageUnion.m */; };
 		9CD7BB581AD6041300322380 /* TdStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB541AD6041300322380 /* TdStudent.m */; };
 		9CD7BB5B1AD6044200322380 /* TdChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB5A1AD6044200322380 /* TdChatDBManager.m */; };
-		9CD7BB5E1AD6055900322380 /* TdMsgListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB5D1AD6055900322380 /* TdMsgListCell.m */; };
 		9CD7BB651AD6093000322380 /* RZImageDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB611AD6093000322380 /* RZImageDisplay.m */; };
 		9CD7BB661AD6093000322380 /* RZImageDisplay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CD7BB621AD6093000322380 /* RZImageDisplay.xib */; };
 		9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */; };
-		9CD7BB6A1AD60A3D00322380 /* TdMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */; };
 		9CD8CCAB1ADA622C00E8DA23 /* XMPPBandwidthMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CBB01ADA622B00E8DA23 /* XMPPBandwidthMonitor.m */; };
 		9CD8CCAC1ADA622C00E8DA23 /* XMPPCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CBB31ADA622C00E8DA23 /* XMPPCoreDataStorage.m */; };
 		9CD8CCAD1ADA622C00E8DA23 /* XMPPFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CBB71ADA622C00E8DA23 /* XMPPFileTransfer.m */; };
@@ -200,8 +205,6 @@
 		9CD8CD551ADA72EF00E8DA23 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CD4C1ADA72EF00E8DA23 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CD8CD5C1ADA78D800E8DA23 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD8CD5A1ADA788A00E8DA23 /* libz.dylib */; };
 		9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerManager.m */; };
-		9CE156811ADB4C4200A9FDBB /* TdChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE156801ADB4C4200A9FDBB /* TdChatViewController.m */; };
-		9CE156841ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE156831ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -341,6 +344,17 @@
 		9CD21E111AD56381004FDA47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		9CD21E171AD564C0004FDA47 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		9CD21E1C1AD5653D004FDA47 /* CommonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonData.h; sourceTree = "<group>"; };
+		9CD228751ADBEED5006BD201 /* TdAdvancedChatFeatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdAdvancedChatFeatureView.h; sourceTree = "<group>"; };
+		9CD228761ADBEED5006BD201 /* TdAdvancedChatFeatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdAdvancedChatFeatureView.m; sourceTree = "<group>"; };
+		9CD228771ADBEED5006BD201 /* TdMsgListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListCell.h; sourceTree = "<group>"; };
+		9CD228781ADBEED5006BD201 /* TdMsgListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListCell.m; sourceTree = "<group>"; };
+		9CD228801ADBEF35006BD201 /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
+		9CD228831ADBEF45006BD201 /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
+		9CD228861ADBEF55006BD201 /* TdChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdChatViewController.h; sourceTree = "<group>"; };
+		9CD228871ADBEF55006BD201 /* TdChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdChatViewController.m; sourceTree = "<group>"; };
+		9CD228881ADBEF55006BD201 /* TdMsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListViewController.h; sourceTree = "<group>"; };
+		9CD228891ADBEF55006BD201 /* TdMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListViewController.m; sourceTree = "<group>"; };
+		9CD2288B1ADBEF55006BD201 /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
 		9CD7BB4D1AD6041300322380 /* TdFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdFriend.h; sourceTree = "<group>"; };
 		9CD7BB4E1AD6041300322380 /* TdFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdFriend.m; sourceTree = "<group>"; };
 		9CD7BB4F1AD6041300322380 /* TdMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMessage.h; sourceTree = "<group>"; };
@@ -351,15 +365,11 @@
 		9CD7BB541AD6041300322380 /* TdStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdStudent.m; sourceTree = "<group>"; };
 		9CD7BB591AD6044200322380 /* TdChatDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdChatDBManager.h; sourceTree = "<group>"; };
 		9CD7BB5A1AD6044200322380 /* TdChatDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdChatDBManager.m; sourceTree = "<group>"; };
-		9CD7BB5C1AD6055900322380 /* TdMsgListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListCell.h; sourceTree = "<group>"; };
-		9CD7BB5D1AD6055900322380 /* TdMsgListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListCell.m; sourceTree = "<group>"; };
 		9CD7BB601AD6093000322380 /* RZImageDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZImageDisplay.h; sourceTree = "<group>"; };
 		9CD7BB611AD6093000322380 /* RZImageDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZImageDisplay.m; sourceTree = "<group>"; };
 		9CD7BB621AD6093000322380 /* RZImageDisplay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RZImageDisplay.xib; sourceTree = "<group>"; };
 		9CD7BB631AD6093000322380 /* UIImageView+RZWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RZWebImage.h"; sourceTree = "<group>"; };
 		9CD7BB641AD6093000322380 /* UIImageView+RZWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RZWebImage.m"; sourceTree = "<group>"; };
-		9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListViewController.h; sourceTree = "<group>"; };
-		9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListViewController.m; sourceTree = "<group>"; };
 		9CD8CBAF1ADA622B00E8DA23 /* XMPPBandwidthMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBandwidthMonitor.h; sourceTree = "<group>"; };
 		9CD8CBB01ADA622B00E8DA23 /* XMPPBandwidthMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBandwidthMonitor.m; sourceTree = "<group>"; };
 		9CD8CBB21ADA622B00E8DA23 /* XMPPCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCoreDataStorage.h; sourceTree = "<group>"; };
@@ -611,10 +621,6 @@
 		9CDB38FC1AD75A9E00024391 /* TdServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerManager.h; sourceTree = "<group>"; };
 		9CDB38FD1AD75A9E00024391 /* TdServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerManager.m; sourceTree = "<group>"; };
 		9CDB38FF1AD75C2700024391 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
-		9CE1567F1ADB4C4200A9FDBB /* TdChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdChatViewController.h; sourceTree = "<group>"; };
-		9CE156801ADB4C4200A9FDBB /* TdChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdChatViewController.m; sourceTree = "<group>"; };
-		9CE156821ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdAdvancedChatFeatureView.h; sourceTree = "<group>"; };
-		9CE156831ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdAdvancedChatFeatureView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -987,6 +993,7 @@
 		9C758E871AD11426005EBEAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9CD2287F1ADBEF35006BD201 /* FriendCircle */,
 				9CD7BB4A1AD6041300322380 /* Database */,
 				9CD7BB4B1AD6041300322380 /* OpenfireServer */,
 				9CD7BB4C1AD6041300322380 /* Student */,
@@ -1000,11 +1007,9 @@
 		9C758E881AD11426005EBEAE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9CD228821ADBEF45006BD201 /* FriendCircle */,
+				9CD228741ADBEED5006BD201 /* Chat */,
 				9C758E891AD1154B005EBEAE /* Setting */,
-				9CD7BB5C1AD6055900322380 /* TdMsgListCell.h */,
-				9CD7BB5D1AD6055900322380 /* TdMsgListCell.m */,
-				9CE156821ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.h */,
-				9CE156831ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1012,10 +1017,8 @@
 		9C758E921AD11651005EBEAE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9CD7BB681AD60A3D00322380 /* TdMsgListViewController.h */,
-				9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */,
-				9CE1567F1ADB4C4200A9FDBB /* TdChatViewController.h */,
-				9CE156801ADB4C4200A9FDBB /* TdChatViewController.m */,
+				9CD228851ADBEF55006BD201 /* Chat */,
+				9CD2288A1ADBEF55006BD201 /* FriendCircle */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1045,6 +1048,52 @@
 				9CD21E111AD56381004FDA47 /* FMResultSet.m */,
 			);
 			path = FMDB;
+			sourceTree = "<group>";
+		};
+		9CD228741ADBEED5006BD201 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				9CD228751ADBEED5006BD201 /* TdAdvancedChatFeatureView.h */,
+				9CD228761ADBEED5006BD201 /* TdAdvancedChatFeatureView.m */,
+				9CD228771ADBEED5006BD201 /* TdMsgListCell.h */,
+				9CD228781ADBEED5006BD201 /* TdMsgListCell.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		9CD2287F1ADBEF35006BD201 /* FriendCircle */ = {
+			isa = PBXGroup;
+			children = (
+				9CD228801ADBEF35006BD201 /* Readme */,
+			);
+			path = FriendCircle;
+			sourceTree = "<group>";
+		};
+		9CD228821ADBEF45006BD201 /* FriendCircle */ = {
+			isa = PBXGroup;
+			children = (
+				9CD228831ADBEF45006BD201 /* Readme */,
+			);
+			path = FriendCircle;
+			sourceTree = "<group>";
+		};
+		9CD228851ADBEF55006BD201 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				9CD228861ADBEF55006BD201 /* TdChatViewController.h */,
+				9CD228871ADBEF55006BD201 /* TdChatViewController.m */,
+				9CD228881ADBEF55006BD201 /* TdMsgListViewController.h */,
+				9CD228891ADBEF55006BD201 /* TdMsgListViewController.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		9CD2288A1ADBEF55006BD201 /* FriendCircle */ = {
+			isa = PBXGroup;
+			children = (
+				9CD2288B1ADBEF55006BD201 /* Readme */,
+			);
+			path = FriendCircle;
 			sourceTree = "<group>";
 		};
 		9CD7BB4A1AD6041300322380 /* Database */ = {
@@ -1839,12 +1888,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CD2288E1ADBEF55006BD201 /* Readme in Resources */,
 				9CD7BB661AD6093000322380 /* RZImageDisplay.xib in Resources */,
 				9C758E6C1AD113F4005EBEAE /* Main.storyboard in Resources */,
 				9C758E8A1AD1154B005EBEAE /* Setting in Resources */,
 				9C758E711AD113F4005EBEAE /* LaunchScreen.xib in Resources */,
+				9CD228811ADBEF35006BD201 /* Readme in Resources */,
 				9C758E6E1AD113F4005EBEAE /* Images.xcassets in Resources */,
 				9C378FA01AD4B5860009528F /* README.txt in Resources */,
+				9CD228841ADBEF45006BD201 /* Readme in Resources */,
 				9C758E8C1AD11575005EBEAE /* Setting in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1891,6 +1943,7 @@
 				9CD8CD0B1ADA622C00E8DA23 /* XMPPMessage+XEP_0333.m in Sources */,
 				9CD21E141AD56381004FDA47 /* FMDatabasePool.m in Sources */,
 				9CD8CD501ADA72EF00E8DA23 /* ASIDownloadCache.m in Sources */,
+				9CD2287B1ADBEED5006BD201 /* TdMsgListCell.m in Sources */,
 				9C3790371AD4B8BD0009528F /* XMPPIQ.m in Sources */,
 				9C37903B1AD4B8BD0009528F /* XMPPParser.m in Sources */,
 				9CD7BB581AD6041300322380 /* TdStudent.m in Sources */,
@@ -1946,11 +1999,10 @@
 				9CD8CCEE1ADA622C00E8DA23 /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */,
 				9C3790301AD4B8BD0009528F /* XMPPXFacebookPlatformAuthentication.m in Sources */,
+				9CD2288C1ADBEF55006BD201 /* TdChatViewController.m in Sources */,
 				9CD8CCC51ADA622C00E8DA23 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
-				9CE156811ADB4C4200A9FDBB /* TdChatViewController.m in Sources */,
 				9C3790321AD4B8BD0009528F /* NSData+XMPP.m in Sources */,
 				9C378F231AD4B1C30009528F /* TestXmpp.m in Sources */,
-				9CD7BB5E1AD6055900322380 /* TdMsgListCell.m in Sources */,
 				9C378F9B1AD4B5860009528F /* DDLog.m in Sources */,
 				9CD8CD061ADA622C00E8DA23 /* XMPPMessage+XEP_0224.m in Sources */,
 				9CD8CCD01ADA622C00E8DA23 /* XMPPRoom.m in Sources */,
@@ -1979,12 +2031,11 @@
 				9CD8CD2E1ADA6F2800E8DA23 /* SBJsonStreamParserAdapter.m in Sources */,
 				9CD8CD001ADA622C00E8DA23 /* XMPPPing.m in Sources */,
 				9CD8CD551ADA72EF00E8DA23 /* Reachability.m in Sources */,
-				9CE156841ADB4E0300A9FDBB /* TdAdvancedChatFeatureView.m in Sources */,
 				9C378FD91AD4B6A20009528F /* DDXMLElement.m in Sources */,
-				9CD7BB6A1AD60A3D00322380 /* TdMsgListViewController.m in Sources */,
 				9C3790431AD4B8BD0009528F /* XMPPStringPrep.m in Sources */,
 				9C37902C1AD4B8BD0009528F /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				9CD8CCCC1ADA622C00E8DA23 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
+				9CD2288D1ADBEF55006BD201 /* TdMsgListViewController.m in Sources */,
 				9C3790391AD4B8BD0009528F /* XMPPMessage.m in Sources */,
 				9CD8CCC81ADA622C00E8DA23 /* XMPPRoomHybridStorage.m in Sources */,
 				9CD8CCD41ADA622C00E8DA23 /* XMPPvCardCoreDataStorageObject.m in Sources */,
@@ -2030,6 +2081,7 @@
 				9CD8CCC41ADA622C00E8DA23 /* XMPPRoomCoreDataStorage.m in Sources */,
 				9CD8CCC61ADA622C00E8DA23 /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				9CD8CCF81ADA622C00E8DA23 /* XMPPPresence+XEP_0172.m in Sources */,
+				9CD2287A1ADBEED5006BD201 /* TdAdvancedChatFeatureView.m in Sources */,
 				9CD8CCB71ADA622C00E8DA23 /* XMPPUserCoreDataStorageObject.m in Sources */,
 				9CD8CCAC1ADA622C00E8DA23 /* XMPPCoreDataStorage.m in Sources */,
 				9C378F9E1AD4B5860009528F /* DDDispatchQueueLogFormatter.m in Sources */,

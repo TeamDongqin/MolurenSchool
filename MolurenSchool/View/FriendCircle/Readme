@@ -1,0 +1,5 @@
+All friendcircle views should be under this folder.
+
+Since we're developing our own friendcircly feature, we build our own classes, refer to sample implementaion methods.
+
+For product specific classes, it would be great to start with "Td"(which means Team Dongqin :) ).
