@@ -75,6 +75,17 @@
 		9CD2288C1ADBEF55006BD201 /* TdChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228871ADBEF55006BD201 /* TdChatViewController.m */; };
 		9CD2288D1ADBEF55006BD201 /* TdMsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228891ADBEF55006BD201 /* TdMsgListViewController.m */; };
 		9CD2288E1ADBEF55006BD201 /* Readme in Resources */ = {isa = PBXBuildFile; fileRef = 9CD2288B1ADBEF55006BD201 /* Readme */; };
+		9CD228A31ADBF5D3006BD201 /* MMHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228911ADBF5D3006BD201 /* MMHud.m */; };
+		9CD228A41ADBF5D3006BD201 /* MMProgressHUD+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228931ADBF5D3006BD201 /* MMProgressHUD+Animations.m */; };
+		9CD228A51ADBF5D3006BD201 /* MMProgressHUD+Class.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228941ADBF5D3006BD201 /* MMProgressHUD+Class.m */; };
+		9CD228A61ADBF5D3006BD201 /* MMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228961ADBF5D3006BD201 /* MMProgressHUD.m */; };
+		9CD228A71ADBF5D3006BD201 /* MMProgressHUDOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228981ADBF5D3006BD201 /* MMProgressHUDOverlayView.m */; };
+		9CD228A81ADBF5D3006BD201 /* MMProgressHUDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD2289A1ADBF5D3006BD201 /* MMProgressHUDViewController.m */; };
+		9CD228A91ADBF5D3006BD201 /* MMProgressHUDWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD2289C1ADBF5D3006BD201 /* MMProgressHUDWindow.m */; };
+		9CD228AA1ADBF5D3006BD201 /* MMRadialProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD2289E1ADBF5D3006BD201 /* MMRadialProgressView.m */; };
+		9CD228AB1ADBF5D3006BD201 /* MMVectorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228A01ADBF5D3006BD201 /* MMVectorImage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9CD228AC1ADBF5D3006BD201 /* MSKeyBoardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228A21ADBF5D3006BD201 /* MSKeyBoardManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9CD228AF1ADBFB3C006BD201 /* TdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD228AE1ADBFB3C006BD201 /* TdTableViewCell.m */; };
 		9CD7BB551AD6041300322380 /* TdFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB4E1AD6041300322380 /* TdFriend.m */; };
 		9CD7BB561AD6041300322380 /* TdMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB501AD6041300322380 /* TdMessage.m */; };
 		9CD7BB571AD6041300322380 /* TdMessageUnion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7BB521AD6041300322380 /* TdMessageUnion.m */; };
@@ -355,6 +366,27 @@
 		9CD228881ADBEF55006BD201 /* TdMsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMsgListViewController.h; sourceTree = "<group>"; };
 		9CD228891ADBEF55006BD201 /* TdMsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdMsgListViewController.m; sourceTree = "<group>"; };
 		9CD2288B1ADBEF55006BD201 /* Readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme; sourceTree = "<group>"; };
+		9CD228901ADBF5D3006BD201 /* MMHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHud.h; sourceTree = "<group>"; };
+		9CD228911ADBF5D3006BD201 /* MMHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHud.m; sourceTree = "<group>"; };
+		9CD228921ADBF5D3006BD201 /* MMProgressHUD+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMProgressHUD+Animations.h"; sourceTree = "<group>"; };
+		9CD228931ADBF5D3006BD201 /* MMProgressHUD+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMProgressHUD+Animations.m"; sourceTree = "<group>"; };
+		9CD228941ADBF5D3006BD201 /* MMProgressHUD+Class.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMProgressHUD+Class.m"; sourceTree = "<group>"; };
+		9CD228951ADBF5D3006BD201 /* MMProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUD.h; sourceTree = "<group>"; };
+		9CD228961ADBF5D3006BD201 /* MMProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUD.m; sourceTree = "<group>"; };
+		9CD228971ADBF5D3006BD201 /* MMProgressHUDOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDOverlayView.h; sourceTree = "<group>"; };
+		9CD228981ADBF5D3006BD201 /* MMProgressHUDOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDOverlayView.m; sourceTree = "<group>"; };
+		9CD228991ADBF5D3006BD201 /* MMProgressHUDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDViewController.h; sourceTree = "<group>"; };
+		9CD2289A1ADBF5D3006BD201 /* MMProgressHUDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDViewController.m; sourceTree = "<group>"; };
+		9CD2289B1ADBF5D3006BD201 /* MMProgressHUDWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMProgressHUDWindow.h; sourceTree = "<group>"; };
+		9CD2289C1ADBF5D3006BD201 /* MMProgressHUDWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMProgressHUDWindow.m; sourceTree = "<group>"; };
+		9CD2289D1ADBF5D3006BD201 /* MMRadialProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMRadialProgressView.h; sourceTree = "<group>"; };
+		9CD2289E1ADBF5D3006BD201 /* MMRadialProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMRadialProgressView.m; sourceTree = "<group>"; };
+		9CD2289F1ADBF5D3006BD201 /* MMVectorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMVectorImage.h; sourceTree = "<group>"; };
+		9CD228A01ADBF5D3006BD201 /* MMVectorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMVectorImage.m; sourceTree = "<group>"; };
+		9CD228A11ADBF5D3006BD201 /* MSKeyBoardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSKeyBoardManager.h; sourceTree = "<group>"; };
+		9CD228A21ADBF5D3006BD201 /* MSKeyBoardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSKeyBoardManager.m; sourceTree = "<group>"; };
+		9CD228AD1ADBFB3C006BD201 /* TdTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdTableViewCell.h; sourceTree = "<group>"; };
+		9CD228AE1ADBFB3C006BD201 /* TdTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdTableViewCell.m; sourceTree = "<group>"; };
 		9CD7BB4D1AD6041300322380 /* TdFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdFriend.h; sourceTree = "<group>"; };
 		9CD7BB4E1AD6041300322380 /* TdFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdFriend.m; sourceTree = "<group>"; };
 		9CD7BB4F1AD6041300322380 /* TdMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdMessage.h; sourceTree = "<group>"; };
@@ -650,6 +682,7 @@
 		9C378F241AD4B5860009528F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				9CD2288F1ADBF5D3006BD201 /* HUD */,
 				9CD8CD361ADA72EF00E8DA23 /* ASIHTTPRequest */,
 				9CD8CD101ADA6F2800E8DA23 /* SBJson */,
 				9CD7BB5F1AD6093000322380 /* RZWebImage */,
@@ -1057,6 +1090,8 @@
 				9CD228761ADBEED5006BD201 /* TdAdvancedChatFeatureView.m */,
 				9CD228771ADBEED5006BD201 /* TdMsgListCell.h */,
 				9CD228781ADBEED5006BD201 /* TdMsgListCell.m */,
+				9CD228AD1ADBFB3C006BD201 /* TdTableViewCell.h */,
+				9CD228AE1ADBFB3C006BD201 /* TdTableViewCell.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1094,6 +1129,32 @@
 				9CD2288B1ADBEF55006BD201 /* Readme */,
 			);
 			path = FriendCircle;
+			sourceTree = "<group>";
+		};
+		9CD2288F1ADBF5D3006BD201 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				9CD228901ADBF5D3006BD201 /* MMHud.h */,
+				9CD228911ADBF5D3006BD201 /* MMHud.m */,
+				9CD228921ADBF5D3006BD201 /* MMProgressHUD+Animations.h */,
+				9CD228931ADBF5D3006BD201 /* MMProgressHUD+Animations.m */,
+				9CD228941ADBF5D3006BD201 /* MMProgressHUD+Class.m */,
+				9CD228951ADBF5D3006BD201 /* MMProgressHUD.h */,
+				9CD228961ADBF5D3006BD201 /* MMProgressHUD.m */,
+				9CD228971ADBF5D3006BD201 /* MMProgressHUDOverlayView.h */,
+				9CD228981ADBF5D3006BD201 /* MMProgressHUDOverlayView.m */,
+				9CD228991ADBF5D3006BD201 /* MMProgressHUDViewController.h */,
+				9CD2289A1ADBF5D3006BD201 /* MMProgressHUDViewController.m */,
+				9CD2289B1ADBF5D3006BD201 /* MMProgressHUDWindow.h */,
+				9CD2289C1ADBF5D3006BD201 /* MMProgressHUDWindow.m */,
+				9CD2289D1ADBF5D3006BD201 /* MMRadialProgressView.h */,
+				9CD2289E1ADBF5D3006BD201 /* MMRadialProgressView.m */,
+				9CD2289F1ADBF5D3006BD201 /* MMVectorImage.h */,
+				9CD228A01ADBF5D3006BD201 /* MMVectorImage.m */,
+				9CD228A11ADBF5D3006BD201 /* MSKeyBoardManager.h */,
+				9CD228A21ADBF5D3006BD201 /* MSKeyBoardManager.m */,
+			);
+			path = HUD;
 			sourceTree = "<group>";
 		};
 		9CD7BB4A1AD6041300322380 /* Database */ = {
@@ -1928,10 +1989,12 @@
 				9CD8CCD51ADA622C00E8DA23 /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
 				9CD8CD0A1ADA622C00E8DA23 /* XMPPMessage+XEP_0308.m in Sources */,
 				9C37903E1AD4B8BD0009528F /* DDList.m in Sources */,
+				9CD228AA1ADBF5D3006BD201 /* MMRadialProgressView.m in Sources */,
 				9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */,
 				9CD8CCB81ADA622C00E8DA23 /* XMPPResourceMemoryStorageObject.m in Sources */,
 				9CD8CCE11ADA622C00E8DA23 /* XMPPPubSub.m in Sources */,
 				9C378FD81AD4B6A20009528F /* DDXMLDocument.m in Sources */,
+				9CD228A41ADBF5D3006BD201 /* MMProgressHUD+Animations.m in Sources */,
 				9C378FC51AD4B62C0009528F /* GCDAsyncSocket.m in Sources */,
 				9C3790331AD4B8BD0009528F /* NSNumber+XMPP.m in Sources */,
 				9CD8CCD11ADA622C00E8DA23 /* XMPPvCard.xcdatamodeld in Sources */,
@@ -1965,6 +2028,7 @@
 				9CD8CCB01ADA622C00E8DA23 /* XMPPGoogleSharedStatus.m in Sources */,
 				9C37903C1AD4B8BD0009528F /* XMPPPresence.m in Sources */,
 				9CD8CCD61ADA622C00E8DA23 /* XMPPvCardTemp.m in Sources */,
+				9CD228AB1ADBF5D3006BD201 /* MMVectorImage.m in Sources */,
 				9CD8CD521ADA72EF00E8DA23 /* ASIHTTPRequest.m in Sources */,
 				9CD8CD531ADA72EF00E8DA23 /* ASIInputStream.m in Sources */,
 				9CD8CCF11ADA622C00E8DA23 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
@@ -1978,6 +2042,7 @@
 				9CD8CD2C1ADA6F2800E8DA23 /* SBJsonStreamParser.m in Sources */,
 				9CD8CD541ADA72EF00E8DA23 /* ASINetworkQueue.m in Sources */,
 				9CD8CCC21ADA622C00E8DA23 /* XMPPPrivacy.m in Sources */,
+				9CD228A91ADBF5D3006BD201 /* MMProgressHUDWindow.m in Sources */,
 				9CD8CCAF1ADA622C00E8DA23 /* XMPPOutgoingFileTransfer.m in Sources */,
 				9CD8CCCB1ADA622C00E8DA23 /* XMPPRoomMemoryStorage.m in Sources */,
 				9C378F9A1AD4B5860009528F /* DDFileLogger.m in Sources */,
@@ -1997,10 +2062,12 @@
 				9C378F9F1AD4B5860009528F /* DDMultiFormatter.m in Sources */,
 				9CD8CD311ADA6F2800E8DA23 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				9CD8CCEE1ADA622C00E8DA23 /* XMPPCapsCoreDataStorageObject.m in Sources */,
+				9CD228A81ADBF5D3006BD201 /* MMProgressHUDViewController.m in Sources */,
 				9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */,
 				9C3790301AD4B8BD0009528F /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				9CD2288C1ADBEF55006BD201 /* TdChatViewController.m in Sources */,
 				9CD8CCC51ADA622C00E8DA23 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
+				9CD228AC1ADBF5D3006BD201 /* MSKeyBoardManager.m in Sources */,
 				9C3790321AD4B8BD0009528F /* NSData+XMPP.m in Sources */,
 				9C378F231AD4B1C30009528F /* TestXmpp.m in Sources */,
 				9C378F9B1AD4B5860009528F /* DDLog.m in Sources */,
@@ -2016,6 +2083,7 @@
 				9CD8CCE31ADA622C00E8DA23 /* XMPPIQ+XEP_0066.m in Sources */,
 				9CD8CCBC1ADA622C00E8DA23 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				9C378F991AD4B5860009528F /* DDASLLogger.m in Sources */,
+				9CD228A71ADBF5D3006BD201 /* MMProgressHUDOverlayView.m in Sources */,
 				9CD8CCFA1ADA622C00E8DA23 /* XMPPMessageDeliveryReceipts.m in Sources */,
 				9C3790401AD4B8BD0009528F /* RFImageToDataTransformer.m in Sources */,
 				9CD8CD341ADA6F2800E8DA23 /* SBJsonUTF8Stream.m in Sources */,
@@ -2039,6 +2107,7 @@
 				9C3790391AD4B8BD0009528F /* XMPPMessage.m in Sources */,
 				9CD8CCC81ADA622C00E8DA23 /* XMPPRoomHybridStorage.m in Sources */,
 				9CD8CCD41ADA622C00E8DA23 /* XMPPvCardCoreDataStorageObject.m in Sources */,
+				9CD228A61ADBF5D3006BD201 /* MMProgressHUD.m in Sources */,
 				9CD8CD081ADA622C00E8DA23 /* XMPPMessageCarbons.m in Sources */,
 				9C3790341AD4B8BD0009528F /* NSXMLElement+XMPP.m in Sources */,
 				9CD8CCC11ADA622C00E8DA23 /* XMPPLastActivity.m in Sources */,
@@ -2074,10 +2143,13 @@
 				9CD8CD4D1ADA72EF00E8DA23 /* ASIAuthenticationDialog.m in Sources */,
 				9CD8CCE21ADA622C00E8DA23 /* TURNSocket.m in Sources */,
 				9CD8CCE81ADA622C00E8DA23 /* XMPPMessage+XEP_0085.m in Sources */,
+				9CD228AF1ADBFB3C006BD201 /* TdTableViewCell.m in Sources */,
 				9C3790311AD4B8BD0009528F /* XMPPXOAuth2Google.m in Sources */,
+				9CD228A51ADBF5D3006BD201 /* MMProgressHUD+Class.m in Sources */,
 				9CD8CCEC1ADA622C00E8DA23 /* XMPPCapabilities.xcdatamodel in Sources */,
 				9CD8CCB61ADA622C00E8DA23 /* XMPPRosterCoreDataStorage.m in Sources */,
 				9CD8CD2D1ADA6F2800E8DA23 /* SBJsonStreamParserAccumulator.m in Sources */,
+				9CD228A31ADBF5D3006BD201 /* MMHud.m in Sources */,
 				9CD8CCC41ADA622C00E8DA23 /* XMPPRoomCoreDataStorage.m in Sources */,
 				9CD8CCC61ADA622C00E8DA23 /* XMPPRoomOccupantCoreDataStorageObject.m in Sources */,
 				9CD8CCF81ADA622C00E8DA23 /* XMPPPresence+XEP_0172.m in Sources */,

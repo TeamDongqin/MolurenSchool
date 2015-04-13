@@ -48,14 +48,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return sharedObject;
 }
 
--(void)Init{
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
-    
-    [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_ID] forKey:kXMPPmyJID];
-    [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_PASSWORD] forKey:kXMPPmyPassword];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    [self setupStream];
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        
+        
+        [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_ID] forKey:kXMPPmyJID];
+        [[NSUserDefaults standardUserDefaults]setObject:[[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_PASSWORD] forKey:kXMPPmyPassword];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        [self setupStream];
+    }
+    return self;
 }
 
 - (void)dealloc

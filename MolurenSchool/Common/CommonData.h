@@ -46,10 +46,10 @@ enum TdMessageType {
 };
 
 enum TdMessageCellStyle {
-    kWCMessageCellStyleMe = 0,
-    kWCMessageCellStyleOther = 1,
-    kWCMessageCellStyleMeWithImage=2,
-    kWCMessageCellStyleOtherWithImage=3
+    TdMessageCellStyleMe = 0,
+    TdMessageCellStyleOther = 1,
+    TdMessageCellStyleMeWithImage=2,
+    TdMessageCellStyleOtherWithImage=3
 };
 
 // Device parameters
