@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048DF6911ADC2B650055322B /* TdFindFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6901ADC2B650055322B /* TdFindFriendViewController.xib */; };
+		048DF69B1ADC30BE0055322B /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF6941ADC30BE0055322B /* EGORefreshTableHeaderView.m */; };
+		048DF69C1ADC30BE0055322B /* LoadMoreTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF6961ADC30BE0055322B /* LoadMoreTableFooterView.m */; };
+		048DF69D1ADC30BE0055322B /* MessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF6981ADC30BE0055322B /* MessageInterceptor.m */; };
+		048DF69E1ADC30BE0055322B /* PullTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF69A1ADC30BE0055322B /* PullTableView.m */; };
+		048DF6A71ADC310F0055322B /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF69F1ADC310F0055322B /* blackArrow.png */; };
+		048DF6A81ADC310F0055322B /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A01ADC310F0055322B /* blackArrow@2x.png */; };
+		048DF6A91ADC310F0055322B /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A11ADC310F0055322B /* blueArrow.png */; };
+		048DF6AA1ADC310F0055322B /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A21ADC310F0055322B /* blueArrow@2x.png */; };
+		048DF6AB1ADC310F0055322B /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A31ADC310F0055322B /* grayArrow.png */; };
+		048DF6AC1ADC310F0055322B /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A41ADC310F0055322B /* grayArrow@2x.png */; };
+		048DF6AD1ADC310F0055322B /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A51ADC310F0055322B /* whiteArrow.png */; };
+		048DF6AE1ADC310F0055322B /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF6A61ADC310F0055322B /* whiteArrow@2x.png */; };
 		9C378F231AD4B1C30009528F /* TestXmpp.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C378F221AD4B1C30009528F /* TestXmpp.m */; };
 		9C378F981AD4B5860009528F /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C378F2A1AD4B5860009528F /* DDAbstractDatabaseLogger.m */; };
 		9C378F991AD4B5860009528F /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C378F2C1AD4B5860009528F /* DDASLLogger.m */; };
@@ -94,6 +107,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048DF6901ADC2B650055322B /* TdFindFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TdFindFriendViewController.xib; sourceTree = "<group>"; };
+		048DF6931ADC30BE0055322B /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		048DF6941ADC30BE0055322B /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		048DF6951ADC30BE0055322B /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreTableFooterView.h; sourceTree = "<group>"; };
+		048DF6961ADC30BE0055322B /* LoadMoreTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreTableFooterView.m; sourceTree = "<group>"; };
+		048DF6971ADC30BE0055322B /* MessageInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInterceptor.h; sourceTree = "<group>"; };
+		048DF6981ADC30BE0055322B /* MessageInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInterceptor.m; sourceTree = "<group>"; };
+		048DF6991ADC30BE0055322B /* PullTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullTableView.h; sourceTree = "<group>"; };
+		048DF69A1ADC30BE0055322B /* PullTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullTableView.m; sourceTree = "<group>"; };
+		048DF69F1ADC310F0055322B /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		048DF6A01ADC310F0055322B /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		048DF6A11ADC310F0055322B /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		048DF6A21ADC310F0055322B /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		048DF6A31ADC310F0055322B /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		048DF6A41ADC310F0055322B /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		048DF6A51ADC310F0055322B /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		048DF6A61ADC310F0055322B /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		9C378F211AD4B1C30009528F /* TestXmpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXmpp.h; sourceTree = "<group>"; };
 		9C378F221AD4B1C30009528F /* TestXmpp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestXmpp.m; sourceTree = "<group>"; };
 		9C378F291AD4B5860009528F /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
@@ -270,9 +300,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048DF6921ADC30320055322B /* EGO */ = {
+			isa = PBXGroup;
+			children = (
+				048DF69F1ADC310F0055322B /* blackArrow.png */,
+				048DF6A01ADC310F0055322B /* blackArrow@2x.png */,
+				048DF6A11ADC310F0055322B /* blueArrow.png */,
+				048DF6A21ADC310F0055322B /* blueArrow@2x.png */,
+				048DF6A31ADC310F0055322B /* grayArrow.png */,
+				048DF6A41ADC310F0055322B /* grayArrow@2x.png */,
+				048DF6A51ADC310F0055322B /* whiteArrow.png */,
+				048DF6A61ADC310F0055322B /* whiteArrow@2x.png */,
+				048DF6931ADC30BE0055322B /* EGORefreshTableHeaderView.h */,
+				048DF6941ADC30BE0055322B /* EGORefreshTableHeaderView.m */,
+				048DF6951ADC30BE0055322B /* LoadMoreTableFooterView.h */,
+				048DF6961ADC30BE0055322B /* LoadMoreTableFooterView.m */,
+				048DF6971ADC30BE0055322B /* MessageInterceptor.h */,
+				048DF6981ADC30BE0055322B /* MessageInterceptor.m */,
+				048DF6991ADC30BE0055322B /* PullTableView.h */,
+				048DF69A1ADC30BE0055322B /* PullTableView.m */,
+			);
+			name = EGO;
+			sourceTree = "<group>";
+		};
 		9C378F241AD4B5860009528F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				048DF6921ADC30320055322B /* EGO */,
 				9CD7BB5F1AD6093000322380 /* RZWebImage */,
 				9CD21E071AD56381004FDA47 /* FMDB */,
 				9C378FE21AD4B8BD0009528F /* XmppFramework */,
@@ -631,6 +685,7 @@
 				9CD7BB691AD60A3D00322380 /* TdMsgListViewController.m */,
 				9CD8CBAA1ADA21F000E8DA23 /* TdFindFriendViewController.h */,
 				9CD8CBAB1ADA21F000E8DA23 /* TdFindFriendViewController.m */,
+				048DF6901ADC2B650055322B /* TdFindFriendViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -787,13 +842,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048DF6AA1ADC310F0055322B /* blueArrow@2x.png in Resources */,
 				9CD7BB661AD6093000322380 /* RZImageDisplay.xib in Resources */,
 				9C758E6C1AD113F4005EBEAE /* Main.storyboard in Resources */,
 				9C758E8A1AD1154B005EBEAE /* Setting in Resources */,
 				9C758E711AD113F4005EBEAE /* LaunchScreen.xib in Resources */,
+				048DF6AC1ADC310F0055322B /* grayArrow@2x.png in Resources */,
 				9C758E6E1AD113F4005EBEAE /* Images.xcassets in Resources */,
+				048DF6AD1ADC310F0055322B /* whiteArrow.png in Resources */,
+				048DF6AB1ADC310F0055322B /* grayArrow.png in Resources */,
 				9C378FA01AD4B5860009528F /* README.txt in Resources */,
+				048DF6AE1ADC310F0055322B /* whiteArrow@2x.png in Resources */,
 				9C758E8C1AD11575005EBEAE /* Setting in Resources */,
+				048DF6A91ADC310F0055322B /* blueArrow.png in Resources */,
+				048DF6A71ADC310F0055322B /* blackArrow.png in Resources */,
+				048DF6A81ADC310F0055322B /* blackArrow@2x.png in Resources */,
+				048DF6911ADC2B650055322B /* TdFindFriendViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,6 +878,7 @@
 				9CD7BB651AD6093000322380 /* RZImageDisplay.m in Sources */,
 				9C37903D1AD4B8BD0009528F /* XMPPStream.m in Sources */,
 				9CD7BB5B1AD6044200322380 /* TdChatDBManager.m in Sources */,
+				048DF69D1ADC30BE0055322B /* MessageInterceptor.m in Sources */,
 				9C3790381AD4B8BD0009528F /* XMPPJID.m in Sources */,
 				9C758E691AD113F4005EBEAE /* ViewController.m in Sources */,
 				9C37903E1AD4B8BD0009528F /* DDList.m in Sources */,
@@ -851,6 +916,7 @@
 				9C37902B1AD4B8BD0009528F /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				9C37903F1AD4B8BD0009528F /* GCDMulticastDelegate.m in Sources */,
 				9C378FDA1AD4B6A20009528F /* DDXMLNode.m in Sources */,
+				048DF69C1ADC30BE0055322B /* LoadMoreTableFooterView.m in Sources */,
 				9CD21E151AD56381004FDA47 /* FMDatabaseQueue.m in Sources */,
 				9C378FD91AD4B6A20009528F /* DDXMLElement.m in Sources */,
 				9CD7BB6A1AD60A3D00322380 /* TdMsgListViewController.m in Sources */,
@@ -867,10 +933,12 @@
 				9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */,
 				9C37902E1AD4B8BD0009528F /* XMPPPlainAuthentication.m in Sources */,
 				9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */,
+				048DF69B1ADC30BE0055322B /* EGORefreshTableHeaderView.m in Sources */,
 				9C3790311AD4B8BD0009528F /* XMPPXOAuth2Google.m in Sources */,
 				9C378F9E1AD4B5860009528F /* DDDispatchQueueLogFormatter.m in Sources */,
 				9C378FD71AD4B6A20009528F /* NSString+DDXML.m in Sources */,
 				9CD7BB571AD6041300322380 /* TdMessageUnion.m in Sources */,
+				048DF69E1ADC30BE0055322B /* PullTableView.m in Sources */,
 				9CD7BB561AD6041300322380 /* TdMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

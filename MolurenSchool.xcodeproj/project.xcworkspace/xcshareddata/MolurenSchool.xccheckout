@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FBE308F3-99E3-4C29-BD66-12CB70FA812F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MolurenSchool</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>48376FB3B232285A52C65C4248E8E82513366C2D</key>
+		<string>https://github.com/TeamDongqin/MolurenSchool.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MolurenSchool.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>48376FB3B232285A52C65C4248E8E82513366C2D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/TeamDongqin/MolurenSchool.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>48376FB3B232285A52C65C4248E8E82513366C2D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>48376FB3B232285A52C65C4248E8E82513366C2D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MolurenSchool</string>
+		</dict>
+	</array>
+</dict>
+</plist>
