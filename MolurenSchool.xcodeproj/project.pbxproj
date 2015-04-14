@@ -61,6 +61,7 @@
 		9C758E7D1AD113F4005EBEAE /* MolurenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */; };
 		9C758E8A1AD1154B005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E891AD1154B005EBEAE /* Setting */; };
 		9C758E8C1AD11575005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E8B1AD11575005EBEAE /* Setting */; };
+		9CCEEBB31ADD47D100322EE7 /* TdLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */; };
 		9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E041AD55F8F004FDA47 /* CommonSetting.m */; };
 		9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E091AD56381004FDA47 /* FMDatabase.m */; };
 		9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */; };
@@ -342,6 +343,8 @@
 		9C758E7C1AD113F4005EBEAE /* MolurenSchoolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MolurenSchoolTests.m; sourceTree = "<group>"; };
 		9C758E891AD1154B005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9C758E8B1AD11575005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
+		9CCEEBB11ADD47D100322EE7 /* TdLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdLoginViewController.h; sourceTree = "<group>"; };
+		9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdLoginViewController.m; sourceTree = "<group>"; };
 		9CD21E031AD55F8F004FDA47 /* CommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSetting.h; sourceTree = "<group>"; };
 		9CD21E041AD55F8F004FDA47 /* CommonSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSetting.m; sourceTree = "<group>"; };
 		9CD21E061AD56136004FDA47 /* Prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.h; sourceTree = "<group>"; };
@@ -1057,10 +1060,20 @@
 		9C758E921AD11651005EBEAE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9CCEEBB01ADD47B500322EE7 /* Login&Reg */,
 				9CD228851ADBEF55006BD201 /* Chat */,
 				9CD2288A1ADBEF55006BD201 /* FriendCircle */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		9CCEEBB01ADD47B500322EE7 /* Login&Reg */ = {
+			isa = PBXGroup;
+			children = (
+				9CCEEBB11ADD47D100322EE7 /* TdLoginViewController.h */,
+				9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */,
+			);
+			path = "Login&Reg";
 			sourceTree = "<group>";
 		};
 		9CD21E021AD55F7E004FDA47 /* Common */ = {
@@ -2156,6 +2169,7 @@
 				9C3790361AD4B8BD0009528F /* XMPPElement.m in Sources */,
 				9CD8CCEF1ADA622C00E8DA23 /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				9CD7BB671AD6093000322380 /* UIImageView+RZWebImage.m in Sources */,
+				9CCEEBB31ADD47D100322EE7 /* TdLoginViewController.m in Sources */,
 				9C37902E1AD4B8BD0009528F /* XMPPPlainAuthentication.m in Sources */,
 				9CD8CCF31ADA622C00E8DA23 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */,
