@@ -7,14 +7,6 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-// Log levels: off, error, warn, info, verbose
-// Log flags: trace
-#if DEBUG
-  static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN; // | XMPP_LOG_FLAG_TRACE;
-#else
-  static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
-#endif
-
 NSString *const XMPPProcessOneSessionID = @"XMPPProcessOneSessionID";
 NSString *const XMPPProcessOneSessionJID = @"XMPPProcessOneSessionJID";
 NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
@@ -93,7 +85,7 @@ NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
 
 - (NSXMLElement *)pushConfiguration
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return pushConfiguration;
 	}
@@ -130,7 +122,7 @@ NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
 		}
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -319,7 +311,7 @@ NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
 	if (!sessionID || !sessionJID)
 	{
 		NSString *errMsg = @"Missing sessionID and/or sessionJID.";
-		NSDictionary *info = [NSDictionary dictionaryWithObject:errMsg forKey:NSLocalizedDescriptionKey];
+		NSDictionary *info = @{NSLocalizedDescriptionKey : errMsg};
 		
 		NSError *err = [NSError errorWithDomain:XMPPStreamErrorDomain code:XMPPStreamInvalidState userInfo:info];
 		
@@ -384,8 +376,8 @@ NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
 			result = (push != nil);
 		}
 	}};
-	
-	if (dispatch_get_current_queue() == self.xmppQueue)
+
+	if (dispatch_get_specific(self.xmppQueueTag))
 		block();
 	else
 		dispatch_sync(self.xmppQueue, block);
@@ -410,7 +402,7 @@ NSString *const XMPPProcessOneSessionDate = @"XMPPProcessOneSessionDate";
 		}
 	}};
 	
-	if (dispatch_get_current_queue() == self.xmppQueue)
+	if (dispatch_get_specific(self.xmppQueueTag))
 		block();
 	else
 		dispatch_sync(self.xmppQueue, block);

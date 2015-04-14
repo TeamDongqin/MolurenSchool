@@ -104,7 +104,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -150,7 +150,7 @@ enum XMPPRoomState
 
 - (XMPPJID *)myRoomJID
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return myRoomJID;
 	}
@@ -168,7 +168,7 @@ enum XMPPRoomState
 
 - (NSString *)myNickname
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return myNickname;
 	}
@@ -186,7 +186,7 @@ enum XMPPRoomState
 
 - (NSString *)roomSubject
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return roomSubject;
 	}
@@ -210,7 +210,7 @@ enum XMPPRoomState
 		result = (state & kXMPPRoomStateJoined) ? YES : NO;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -229,7 +229,7 @@ enum XMPPRoomState
 		result = [myOccupant.affiliation isEqualToString:@"owner"];
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -301,7 +301,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -373,7 +373,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -471,15 +471,19 @@ enum XMPPRoomState
 		}
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
 }
 
-- (void)chageNickname:(NSString *)newNickname
+- (void)changeNickname:(NSString *)newNickname
 {
-	// Todo
+	myOldNickname = [myNickname copy];
+	myNickname = [newNickname copy];
+    myRoomJID = [XMPPJID jidWithUser:[roomJID user] domain:[roomJID domain] resource:myNickname];
+    XMPPPresence *presence = [XMPPPresence presenceWithType:nil to:myRoomJID];
+    [xmppStream sendElement:presence];
 }
 
 - (void)changeRoomSubject:(NSString *)newRoomSubject
@@ -502,7 +506,7 @@ enum XMPPRoomState
 		// </iq>
 		
 		NSXMLElement *query = [iq elementForName:@"query" xmlns:XMPPMUCAdminNamespace];
-		NSArray *items = [query elementsForName:@"items"];
+		NSArray *items = [query elementsForName:@"item"];
 		
 		[multicastDelegate xmppRoom:self didFetchBanList:items];
 	}
@@ -544,7 +548,7 @@ enum XMPPRoomState
 		              timeout:60.0];
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -563,7 +567,7 @@ enum XMPPRoomState
 		// </iq>
 		
 		NSXMLElement *query = [iq elementForName:@"query" xmlns:XMPPMUCAdminNamespace];
-		NSArray *items = [query elementsForName:@"items"];
+		NSArray *items = [query elementsForName:@"item"];
 		
 		[multicastDelegate xmppRoom:self didFetchMembersList:items];
 	}
@@ -605,7 +609,7 @@ enum XMPPRoomState
 		              timeout:60.0];
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -626,7 +630,7 @@ enum XMPPRoomState
 		// </iq>
 		
 		NSXMLElement *query = [iq elementForName:@"query" xmlns:XMPPMUCAdminNamespace];
-		NSArray *items = [query elementsForName:@"items"];
+		NSArray *items = [query elementsForName:@"item"];
 		
 		[multicastDelegate xmppRoom:self didFetchModeratorsList:items];
 	}
@@ -667,7 +671,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -719,7 +723,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -751,7 +755,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -771,7 +775,7 @@ enum XMPPRoomState
 	}
 }
 
-- (void)destoryRoom
+- (void)destroyRoom
 {
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
@@ -801,7 +805,7 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -846,39 +850,41 @@ enum XMPPRoomState
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
 }
 
-- (void)sendMessage:(NSString *)msg
+- (void)sendMessage:(XMPPMessage *)message
 {
-	if ([msg length] == 0) return;
-	
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
 		XMPPLogTrace();
-		
-		// <message type='groupchat' to='darkcave@chat.shakespeare.lit/firstwitch'>
-		//   <body>I'll give thee a wind.</body>
-		// </message>
-	
-		NSXMLElement *body = [NSXMLElement elementWithName:@"body" stringValue:msg];
-		
-		XMPPMessage *message = [XMPPMessage message];
+				
 		[message addAttributeWithName:@"to" stringValue:[roomJID full]];
 		[message addAttributeWithName:@"type" stringValue:@"groupchat"];
-		[message addChild:body];
 		
 		[xmppStream sendElement:message];
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
+}
+
+- (void)sendMessageWithBody:(NSString *)messageBody
+{
+	if ([messageBody length] == 0) return;
+		
+	NSXMLElement *body = [NSXMLElement elementWithName:@"body" stringValue:messageBody];
+	
+	XMPPMessage *message = [XMPPMessage message];
+	[message addChild:body];
+	
+	[self sendMessage:message];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -976,7 +982,7 @@ enum XMPPRoomState
 	// Server's don't always properly send the statusCodes in every situation.
 	// So we have some extra checks to ensure the boolean variables are correct.
 	
-	if (didCreateRoom || isNicknameChange)
+	if (didCreateRoom)
 	{
 		isMyPresence = YES;
 	}
@@ -984,6 +990,13 @@ enum XMPPRoomState
 	{
 		if ([[from resource] isEqualToString:myNickname])
 			isMyPresence = YES;
+	}
+	if (!isMyPresence && isNicknameChange && myOldNickname)
+	{
+		if ([[from resource] isEqualToString:myOldNickname]) {
+			isMyPresence = YES;
+			myOldNickname = nil;
+		}
 	}
 	
 	XMPPLogVerbose(@"%@[%@] - isMyPresence = %@", THIS_FILE, roomJID, (isMyPresence ? @"YES" : @"NO"));
@@ -1001,11 +1014,11 @@ enum XMPPRoomState
 	
 	if (isMyPresence)
 	{
-		myRoomJID = from;
-		myNickname = [from resource];
-		
 		if (isAvailable)
 		{
+			myRoomJID = from;
+			myNickname = [from resource];
+            
 			if (state & kXMPPRoomStateJoining)
 			{
 				state &= ~kXMPPRoomStateJoining;
@@ -1068,6 +1081,10 @@ enum XMPPRoomState
 		[xmppRoomStorage handleIncomingMessage:message room:self];
 		[multicastDelegate xmppRoom:self didReceiveMessage:message fromOccupant:from];
 	}
+    else if ([message isGroupChatMessageWithSubject])
+    {
+        roomSubject = [message subject];
+    }
 	else
 	{
 		// Todo... Handle other types of messages.

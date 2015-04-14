@@ -10,7 +10,7 @@
 // Log levels: off, error, warn, info, verbose
 // Log flags: trace
 #if DEBUG
-  static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE; // | XMPP_LOG_FLAG_TRACE;
+  static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN; // | XMPP_LOG_FLAG_TRACE;
 #else
   static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
 #endif
@@ -97,6 +97,13 @@
 #pragma mark Properties
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+- (id <XMPPMessageArchivingStorage>)xmppMessageArchivingStorage
+{
+    // Note: The xmppMessageArchivingStorage variable is read-only (set in the init method)
+    
+    return xmppMessageArchivingStorage;
+}
+
 - (BOOL)clientSideMessageArchivingOnly
 {
 	__block BOOL result = NO;
@@ -105,7 +112,7 @@
 		result = clientSideMessageArchivingOnly;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -119,7 +126,7 @@
 		clientSideMessageArchivingOnly = flag;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -134,7 +141,7 @@
 		result = [preferences copy];
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -164,7 +171,7 @@
 		//  - Send new pref to server (if changed)
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);

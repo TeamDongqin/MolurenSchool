@@ -46,15 +46,27 @@ enum TdMessageType {
 };
 
 enum TdMessageCellStyle {
-    kWCMessageCellStyleMe = 0,
-    kWCMessageCellStyleOther = 1,
-    kWCMessageCellStyleMeWithImage=2,
-    kWCMessageCellStyleOtherWithImage=3
+    TdMessageCellStyleMe = 0,
+    TdMessageCellStyleOther = 1,
+    TdMessageCellStyleMeWithImage=2,
+    TdMessageCellStyleOtherWithImage=3
 };
 
 // Device parameters
 #define Device_Width [[UIScreen mainScreen] bounds].size.width
 #define Device_Height [[UIScreen mainScreen] bounds].size.height
+
+// Device type
+typedef enum {
+    Device_Default,
+    Device_iPhone4,
+    Device_iPhone4s,
+    Device_iPhone5c,
+    Device_iPhone5,
+    Device_iPhone5s,
+    Device_iPhone6,
+    Device_iPhone6Plus
+} DeviceType;
 
 
 #endif

@@ -115,7 +115,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 
 - (BOOL)autoRetrievePrivacyListNames
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return autoRetrievePrivacyListNames;
 	}
@@ -138,7 +138,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 		autoRetrievePrivacyListNames = flag;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -146,7 +146,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 
 - (BOOL)autoRetrievePrivacyListItems
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return autoRetrievePrivacyListItems;
 	}
@@ -169,7 +169,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 		autoRetrievePrivacyListItems = flag;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -177,7 +177,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 
 - (BOOL)autoClearPrivacyListInfo
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return autoClearPrivacyListInfo;
 	}
@@ -200,7 +200,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 		autoClearPrivacyListInfo = flag;
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -260,7 +260,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 {
 	XMPPLogTrace();
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		[privacyDict removeAllObjects];
 	}
@@ -275,7 +275,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 
 - (NSArray *)listNames
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return [privacyDict allKeys];
 	}
@@ -296,7 +296,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 {
 	NSArray* (^block)() = ^ NSArray* () {
 		
-		id result = [privacyDict objectForKey:privacyListName];
+		id result = privacyDict[privacyListName];
 		
 		if (result == [NSNull null]) // Not fetched yet
 			return nil;
@@ -307,7 +307,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 	// ExecuteVoidBlock(moduleQueue, block);
 	// ExecuteNonVoidBlock(moduleQueue, block, NSArray*)
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return block();
 	}
@@ -482,7 +482,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 	queryInfo.timer = timer;
 	
 	// Add to dictionary
-	[pendingQueries setObject:queryInfo forKey:uuid];
+	pendingQueries[uuid] = queryInfo;
 }
 
 - (void)removeQueryInfo:(XMPPPrivacyQueryInfo *)queryInfo withKey:(NSString *)uuid
@@ -522,7 +522,7 @@ typedef enum XMPPPrivacyQueryInfoType {
 
 - (void)queryTimeout:(NSString *)uuid
 {
-	XMPPPrivacyQueryInfo *queryInfo = [privacyDict objectForKey:uuid];
+	XMPPPrivacyQueryInfo *queryInfo = privacyDict[uuid];
 	if (queryInfo)
 	{
 		[self processQuery:queryInfo withFailureCode:XMPPPrivacyQueryTimeout];
@@ -539,10 +539,10 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 	NSString *orderStr2 = [item2 attributeStringValueForName:@"order"];
 	
 	NSUInteger order1;
-	BOOL parse1 = [NSNumber parseString:orderStr1 intoNSUInteger:&order1];
+	BOOL parse1 = [NSNumber xmpp_parseString:orderStr1 intoNSUInteger:&order1];
 	
 	NSUInteger order2;
-	BOOL parse2 = [NSNumber parseString:orderStr2 intoNSUInteger:&order2];
+	BOOL parse2 = [NSNumber xmpp_parseString:orderStr2 intoNSUInteger:&order2];
 	
 	if (parse1)
 	{
@@ -615,10 +615,10 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 				NSString *name = [listName attributeStringValueForName:@"name"];
 				if (name)
 				{
-					id value = [privacyDict objectForKey:name];
+					id value = privacyDict[name];
 					if (value == nil)
 					{
-						[privacyDict setObject:[NSNull null] forKey:name];
+						privacyDict[name] = [NSNull null];
 					}
 				}
 			}
@@ -670,7 +670,7 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 				items = [NSArray array];
 			}
 			
-			[privacyDict setObject:items forKey:queryInfo.privacyListName];
+			privacyDict[queryInfo.privacyListName] = items;
 			
 			[multicastDelegate xmppPrivacy:self didReceiveListWithName:queryInfo.privacyListName items:items];
 		}
@@ -696,7 +696,7 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 				items = [NSArray array];
 			}
 			
-			[privacyDict setObject:items forKey:queryInfo.privacyListName];
+			privacyDict[queryInfo.privacyListName] = items;
 			
 			[multicastDelegate xmppPrivacy:self didSetListWithName:queryInfo.privacyListName];
 		}
@@ -832,7 +832,7 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 	{
 		// This may be a response to a query we sent
 		
-		XMPPPrivacyQueryInfo *queryInfo = [pendingQueries objectForKey:[iq elementID]];
+		XMPPPrivacyQueryInfo *queryInfo = pendingQueries[[iq elementID]];
 		if (queryInfo)
 		{
 			[self processQueryResponse:iq withInfo:queryInfo];
@@ -841,7 +841,7 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 			{
 				for (NSString *privacyListName in privacyDict)
 				{
-					id privacyListItems = [privacyDict objectForKey:privacyListName];
+					id privacyListItems = privacyDict[privacyListName];
 					
 					if (privacyListItems == [NSNull null])
 					{
@@ -857,14 +857,14 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 	return NO;
 }
 
-- (void)xmppStreamDidDisconnect:(XMPPStream *)sender
+-(void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error
 {
 	// If there are any pending queries,
 	// they just failed due to the disconnection.
 	
 	for (NSString *uuid in pendingQueries)
 	{
-		XMPPPrivacyQueryInfo *queryInfo = [privacyDict objectForKey:uuid];
+		XMPPPrivacyQueryInfo *queryInfo = privacyDict[uuid];
 		
 		[self processQuery:queryInfo withFailureCode:XMPPPrivacyDisconnect];
 	}
@@ -971,7 +971,7 @@ NSInteger sortItems(id itemOne, id itemTwo, void *context)
 	if (timer)
 	{
 		dispatch_source_cancel(timer);
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_release(timer);
 		#endif
 		timer = NULL;

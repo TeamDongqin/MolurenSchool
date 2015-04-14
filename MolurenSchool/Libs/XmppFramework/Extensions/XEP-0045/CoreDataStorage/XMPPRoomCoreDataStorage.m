@@ -1,36 +1,10 @@
 #import "XMPPRoomCoreDataStorage.h"
 #import "XMPPCoreDataStorageProtected.h"
-#import "XMPPElement+Delay.h"
+#import "NSXMLElement+XEP_0203.h"
 #import "XMPPLogging.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-#endif
-
-/**
- * Does ARC support support GCD objects?
- * It does if the minimum deployment target is iOS 6+ or Mac OS X 10.8+
-**/
-#if TARGET_OS_IPHONE
-
-  // Compiling for iOS
-
-  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else                                         // iOS 5.X or earlier
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
-  #endif
-
-#else
-
-  // Compiling for Mac OS X
-
-  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
-  #endif
-
 #endif
 
 // Log levels: off, error, warn, info, verbose
@@ -41,7 +15,7 @@
 #endif
 
 #define AssertPrivateQueue() \
-            NSAssert(dispatch_get_current_queue() == storageQueue, @"Private method: MUST run on storageQueue");
+            NSAssert(dispatch_get_specific(storageQueueTag), @"Private method: MUST run on storageQueue");
 
 @interface XMPPRoomCoreDataStorage ()
 {
@@ -86,12 +60,12 @@
 
 static XMPPRoomCoreDataStorage *sharedInstance;
 
-+ (XMPPRoomCoreDataStorage *)sharedInstance
++ (instancetype)sharedInstance
 {
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
 		
-		sharedInstance = [[XMPPRoomCoreDataStorage alloc] initWithDatabaseFilename:nil];
+		sharedInstance = [[XMPPRoomCoreDataStorage alloc] initWithDatabaseFilename:nil storeOptions:nil];
 	});
 	
 	return sharedInstance;
@@ -130,7 +104,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		result = messageEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -144,7 +118,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		messageEntityName = newMessageEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -158,7 +132,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		result = occupantEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -172,7 +146,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		occupantEntityName = newOccupantEntityName;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -186,7 +160,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		result = maxMessageAge;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -254,7 +228,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		}
 	}};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -268,7 +242,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		result = deleteInterval;
 	};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_sync(storageQueue, block);
@@ -325,7 +299,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		}
 	}};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -338,7 +312,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		[pausedMessageDeletion addObject:[roomJID bareJID]];
 	}};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -352,7 +326,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		[self performDelete];
 	}};
 	
-	if (dispatch_get_current_queue() == storageQueue)
+	if (dispatch_get_specific(storageQueueTag))
 		block();
 	else
 		dispatch_async(storageQueue, block);
@@ -385,7 +359,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 	NSPredicate *predicate;
 	if ([pausedMessageDeletion count] > 0)
 	{
-		predicate = [NSPredicate predicateWithFormat:@"localTimestamp <= %@ AND roomJIDStr NOT IN %@",
+		predicate = [NSPredicate predicateWithFormat:@"localTimestamp <= %@ AND NOT roomJIDStr IN %@",
 		                                                  minLocalTimestamp, pausedMessageDeletion];
 	}
 	else
@@ -427,7 +401,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 	if (deleteTimer)
 	{
 		dispatch_source_cancel(deleteTimer);
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_release(deleteTimer);
 		#endif
 		deleteTimer = NULL;
@@ -464,7 +438,10 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		
 		[self updateDeleteTimer];
 		
-		dispatch_resume(deleteTimer);
+		if(deleteTimer != NULL)
+		{
+			dispatch_resume(deleteTimer);
+		}
 	}
 }
 
@@ -831,7 +808,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 	
 	dispatch_block_t block = ^{ @autoreleasepool {
 		
-		NSManagedObjectContext *moc = inMoc ? inMoc : [self managedObjectContext];
+		NSManagedObjectContext *moc = inMoc ? : [self managedObjectContext];
 		
 		NSEntityDescription *entity = [self messageEntity:moc];
 		
@@ -849,7 +826,7 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 		}
 		
 		NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"localTimestamp" ascending:NO];
-		NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+		NSArray *sortDescriptors = @[sortDescriptor];
 		
 		NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 		[fetchRequest setEntity:entity];
@@ -980,10 +957,10 @@ static XMPPRoomCoreDataStorage *sharedInstance;
 {
 	XMPPLogTrace();
 	
-	XMPPJID *roomJID = room.roomJID;
+	XMPPJID *myRoomJID = room.myRoomJID;
 	XMPPJID *messageJID = [message from];
 	
-	if ([roomJID isEqualToJID:messageJID])
+	if ([myRoomJID isEqualToJID:messageJID])
 	{
 		if (![message wasDelayed])
 		{

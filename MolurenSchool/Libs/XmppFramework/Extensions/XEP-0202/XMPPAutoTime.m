@@ -6,32 +6,6 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-/**
- * Does ARC support support GCD objects?
- * It does if the minimum deployment target is iOS 6+ or Mac OS X 10.8+
-**/
-#if TARGET_OS_IPHONE
-
-  // Compiling for iOS
-
-  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else                                         // iOS 5.X or earlier
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
-  #endif
-
-#else
-
-  // Compiling for Mac OS X
-
-  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
-  #else
-    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
-  #endif
-
-#endif
-
 // Log levels: off, error, warn, info, verbose
 // Log flags: trace
 #if DEBUG
@@ -104,7 +78,7 @@
 		[super deactivate];
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -127,7 +101,7 @@
 
 - (NSTimeInterval)recalibrationInterval
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return recalibrationInterval;
 	}
@@ -168,7 +142,7 @@
 		}
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -176,7 +150,7 @@
 
 - (XMPPJID *)targetJID
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return targetJID;
 	}
@@ -201,7 +175,7 @@
 		}
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -209,7 +183,7 @@
 
 - (NSTimeInterval)timeDifference
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return timeDifference;
 	}
@@ -225,9 +199,27 @@
 	}
 }
 
+- (NSDate *)date
+{
+	if (dispatch_get_specific(moduleQueueTag))
+	{
+		return [[NSDate date] dateByAddingTimeInterval:-timeDifference];
+	}
+	else
+	{
+		__block NSDate *result;
+		
+		dispatch_sync(moduleQueue, ^{
+			result = [[NSDate date] dateByAddingTimeInterval:-timeDifference];
+		});
+		
+		return result;
+	}
+}
+
 - (dispatch_time_t)lastCalibrationTime
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return lastCalibrationTime;
 	}
@@ -383,7 +375,7 @@
 	
 	if (recalibrationTimer)
 	{
-		#if NEEDS_DISPATCH_RETAIN_RELEASE
+		#if !OS_OBJECT_USE_OBJC
 		dispatch_release(recalibrationTimer);
 		#endif
 		recalibrationTimer = NULL;
@@ -451,6 +443,46 @@
 	
 	// We do NOT reset the lastCalibrationTime here.
 	// If we reconnect to the same server, the lastCalibrationTime remains valid.
+}
+
+@end
+
+@implementation XMPPStream (XMPPAutoTime)
+
+- (NSTimeInterval)xmppAutoTime_timeDifferenceForTargetJID:(XMPPJID *)targetJID
+{
+    __block NSTimeInterval timeDifference = 0.0;
+    
+    [self enumerateModulesOfClass:[XMPPAutoTime class] withBlock:^(XMPPModule *module, NSUInteger idx, BOOL *stop) {
+       
+        XMPPAutoTime *autoTime = (XMPPAutoTime *)module;
+        
+        if([targetJID isEqualToJID:autoTime.targetJID] || (!targetJID && !autoTime.targetJID))
+        {
+            timeDifference = autoTime.timeDifference;
+            *stop = YES;
+        }
+    }];
+    
+    return timeDifference;
+}
+
+- (NSDate *)xmppAutoTime_dateForTargetJID:(XMPPJID *)targetJID
+{
+    __block NSDate *date = [NSDate date];
+    
+    [self enumerateModulesOfClass:[XMPPAutoTime class] withBlock:^(XMPPModule *module, NSUInteger idx, BOOL *stop) {
+        
+        XMPPAutoTime *autoTime = (XMPPAutoTime *)module;
+        
+        if([targetJID isEqualToJID:autoTime.targetJID] || (!targetJID && !autoTime.targetJID))
+        {
+            date = autoTime.date;
+            *stop = YES;
+        }
+    }];
+    
+    return date;
 }
 
 @end

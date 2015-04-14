@@ -73,7 +73,7 @@
 		
 	}};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_sync(moduleQueue, block);
@@ -84,7 +84,7 @@
 
 - (BOOL)respondsToQueries
 {
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 	{
 		return respondsToQueries;
 	}
@@ -116,7 +116,7 @@
 		}
 	};
 	
-	if (dispatch_get_current_queue() == moduleQueue)
+	if (dispatch_get_specific(moduleQueueTag))
 		block();
 	else
 		dispatch_async(moduleQueue, block);
@@ -453,6 +453,7 @@
 	
 	NSDateFormatter *df = [[NSDateFormatter alloc] init];
 	[df setFormatterBehavior:NSDateFormatterBehavior10_4]; // Use unicode patterns (as opposed to 10_3)
+    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
 	[df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 	[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	
