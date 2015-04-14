@@ -24,10 +24,29 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
     self.navigationItem.title=_chatPerson.userNickname;
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMsgCome:) name:kXMPPNewMsgNotifaction object:nil];
+    
+    // Initialize table view
+    msgRecordTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Device_Width, Device_Height) style:UITableViewStyleGrouped];
+    msgRecordTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    //[_messageTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    msgRecordTable.scrollEnabled = YES;
+    msgRecordTable.dataSource = self;
+    msgRecordTable.delegate = self;
+    
+    [self.view addSubview:msgRecordTable];
+    
+    SendMsgView = [[TdChatSendMsgView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - [[TdUtilities Instance] GetDeviceSendMsgViewHeight], Device_Width, [[TdUtilities Instance]GetDeviceSendMsgViewHeight])];
+    
+    SendMsgView.delegate = self;
+    SendMsgView.autoresizesSubviews = YES;
+    [self.view addSubview:SendMsgView];
+    
     [self refresh];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //        _myHeadImage=[[UIImage imageWithData:[NSData dataWithContentsOfURL:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]])]retain];
         //        _userHeadImage=[[UIImage imageWithData:[NSData dataWithContentsOfURL:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:_chatPerson.userHead]])]retain];

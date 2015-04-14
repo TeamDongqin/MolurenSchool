@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "TdAdvancedChatFeatureView.h"
 #import "TdStudent.h"
+#import "TdChatSendMsgView.h"
 
 @interface TdChatViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TdAdvancedChatFeatureDelegate>
 {
@@ -19,6 +20,7 @@
     IBOutlet UIView *inputBar;
     //UIImage *_myHeadImage,*_userHeadImage;
     TdAdvancedChatFeatureView *_shareMoreView;
+    TdChatSendMsgView* SendMsgView;
 }
 - (IBAction)sendIt:(id)sender;
 - (IBAction)shareMore:(id)sender;

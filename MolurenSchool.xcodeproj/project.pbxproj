@@ -216,6 +216,8 @@
 		9CD8CD551ADA72EF00E8DA23 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CD4C1ADA72EF00E8DA23 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CD8CD5C1ADA78D800E8DA23 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD8CD5A1ADA788A00E8DA23 /* libz.dylib */; };
 		9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerManager.m */; };
+		9CDD773E1ADC9AD70097942F /* TdChatSendMsgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD773D1ADC9AD70097942F /* TdChatSendMsgView.m */; };
+		9CDD77421ADCA1C40097942F /* TdUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD77411ADCA1C40097942F /* TdUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -653,6 +655,10 @@
 		9CDB38FC1AD75A9E00024391 /* TdServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerManager.h; sourceTree = "<group>"; };
 		9CDB38FD1AD75A9E00024391 /* TdServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerManager.m; sourceTree = "<group>"; };
 		9CDB38FF1AD75C2700024391 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
+		9CDD773C1ADC9AD70097942F /* TdChatSendMsgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdChatSendMsgView.h; sourceTree = "<group>"; };
+		9CDD773D1ADC9AD70097942F /* TdChatSendMsgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdChatSendMsgView.m; sourceTree = "<group>"; };
+		9CDD77401ADCA1C40097942F /* TdUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdUtilities.h; sourceTree = "<group>"; };
+		9CDD77411ADCA1C40097942F /* TdUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -984,6 +990,7 @@
 				9C758E881AD11426005EBEAE /* View */,
 				9C378F241AD4B5860009528F /* Libs */,
 				9CD21E021AD55F7E004FDA47 /* Common */,
+				9CDD773F1ADCA1C40097942F /* Utilities */,
 				9C758E641AD113F4005EBEAE /* AppDelegate.h */,
 				9C758E651AD113F4005EBEAE /* AppDelegate.m */,
 				9C758E671AD113F4005EBEAE /* ViewController.h */,
@@ -1092,6 +1099,8 @@
 				9CD228781ADBEED5006BD201 /* TdMsgListCell.m */,
 				9CD228AD1ADBFB3C006BD201 /* TdTableViewCell.h */,
 				9CD228AE1ADBFB3C006BD201 /* TdTableViewCell.m */,
+				9CDD773C1ADC9AD70097942F /* TdChatSendMsgView.h */,
+				9CDD773D1ADC9AD70097942F /* TdChatSendMsgView.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1869,6 +1878,15 @@
 			path = ASIHTTPRequest;
 			sourceTree = "<group>";
 		};
+		9CDD773F1ADCA1C40097942F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9CDD77401ADCA1C40097942F /* TdUtilities.h */,
+				9CDD77411ADCA1C40097942F /* TdUtilities.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2008,6 +2026,7 @@
 				9CD8CD501ADA72EF00E8DA23 /* ASIDownloadCache.m in Sources */,
 				9CD2287B1ADBEED5006BD201 /* TdMsgListCell.m in Sources */,
 				9C3790371AD4B8BD0009528F /* XMPPIQ.m in Sources */,
+				9CDD773E1ADC9AD70097942F /* TdChatSendMsgView.m in Sources */,
 				9C37903B1AD4B8BD0009528F /* XMPPParser.m in Sources */,
 				9CD7BB581AD6041300322380 /* TdStudent.m in Sources */,
 				9CD8CCC01ADA622C00E8DA23 /* XMPPIQ+LastActivity.m in Sources */,
@@ -2145,6 +2164,7 @@
 				9CD8CCE81ADA622C00E8DA23 /* XMPPMessage+XEP_0085.m in Sources */,
 				9CD228AF1ADBFB3C006BD201 /* TdTableViewCell.m in Sources */,
 				9C3790311AD4B8BD0009528F /* XMPPXOAuth2Google.m in Sources */,
+				9CDD77421ADCA1C40097942F /* TdUtilities.m in Sources */,
 				9CD228A51ADBF5D3006BD201 /* MMProgressHUD+Class.m in Sources */,
 				9CD8CCEC1ADA622C00E8DA23 /* XMPPCapabilities.xcdatamodel in Sources */,
 				9CD8CCB61ADA622C00E8DA23 /* XMPPRosterCoreDataStorage.m in Sources */,

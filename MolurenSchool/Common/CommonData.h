@@ -56,5 +56,17 @@ enum TdMessageCellStyle {
 #define Device_Width [[UIScreen mainScreen] bounds].size.width
 #define Device_Height [[UIScreen mainScreen] bounds].size.height
 
+// Device type
+typedef enum {
+    Device_Default,
+    Device_iPhone4,
+    Device_iPhone4s,
+    Device_iPhone5c,
+    Device_iPhone5,
+    Device_iPhone5s,
+    Device_iPhone6,
+    Device_iPhone6Plus
+} DeviceType;
+
 
 #endif
