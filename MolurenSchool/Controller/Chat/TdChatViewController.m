@@ -212,77 +212,75 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return msgRecords.count;
+    //return msgRecords.count;
+    return 2;
 }
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    static NSString * identifier=@"friendCell";
+//    TdTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+//    if (!cell) {
+//        cell=[[TdTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+//    }
+//    TdMessage *msg=[msgRecords objectAtIndex:indexPath.row];
+//    [cell setMessageObject:msg];
+//    enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
+//    
+//    switch (style) {
+//        case TdMessageCellStyleMe:
+//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+//            
+//            break;
+//        case TdMessageCellStyleOther:
+//            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+//            break;
+//        case TdMessageCellStyleMeWithImage:
+//        {
+//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+//            
+//        }
+//            break;
+//        case TdMessageCellStyleOtherWithImage:{
+//            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    if ([msg.messageType intValue]==kWCMessageTypeImage) {
+//        style=style==TdMessageCellStyleMe?TdMessageCellStyleMeWithImage:TdMessageCellStyleOtherWithImage;
+//        [cell setChatImage:FILE_BASE_URL(msg.messageContent) tag:indexPath.row*2];
+//    }
+//    
+//    [cell setMsgStyle:style];
+//    
+//    return cell;
+    
     static NSString * identifier=@"friendCell";
     TdTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell=[[TdTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
-    TdMessage *msg=[msgRecords objectAtIndex:indexPath.row];
-    [cell setMessageObject:msg];
-    enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
     
-    switch (style) {
-        case TdMessageCellStyleMe:
-            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
-            
-            break;
-        case TdMessageCellStyleOther:
-            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
-            break;
-        case TdMessageCellStyleMeWithImage:
-        {
-            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
-            
-        }
-            break;
-        case TdMessageCellStyleOtherWithImage:{
-            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
-        }
-            break;
-        default:
-            break;
-    }
-    
-    if ([msg.messageType intValue]==kWCMessageTypeImage) {
-        style=style==TdMessageCellStyleMe?TdMessageCellStyleMeWithImage:TdMessageCellStyleOtherWithImage;
-        [cell setChatImage:FILE_BASE_URL(msg.messageContent) tag:indexPath.row*2];
-        
-        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        //            UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg.messageContent]]];
-        //            dispatch_async(dispatch_get_main_queue(), ^{
-        //                [cell setChatImage:image];
-        //            });
-        //
-        //
-        //        });
-        
-        
-        //UIImage *img=[Photo string2Image:msg.messageContent];
-        //[cell setChatImage:[Photo string2Image:msg.messageContent ]];
-        //  [msg setMessageContent:@""];
-    }
-    
-    
-    [cell setMsgStyle:style];
+    cell.textLabel.text = @"Test";
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if( [[msgRecords[indexPath.row] messageType]intValue]==kWCMessageTypeImage)
-        return 55+100;
-    else{
-        
-        NSString *orgin=[msgRecords[indexPath.row]messageContent];
-        CGSize textSize=[orgin sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake((320-HEAD_SIZE-3*INSETS-40), TEXT_MAX_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
-        return 55+textSize.height;}
+//    if( [[msgRecords[indexPath.row] messageType]intValue]==kWCMessageTypeImage)
+//        return 55+100;
+//    else{
+//        
+//        NSString *orgin=[msgRecords[indexPath.row]messageContent];
+//        CGSize textSize=[orgin sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake((320-HEAD_SIZE-3*INSETS-40), TEXT_MAX_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
+//        return 55+textSize.height;}
+    
+    return 55+100;
 }
 
 #pragma mark - Notification
