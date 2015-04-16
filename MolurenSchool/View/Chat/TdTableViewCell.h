@@ -32,4 +32,6 @@
 -(void)setHeadImage:(NSURL*)headImage tag:(int)aTag;
 -(void)setChatImage:(NSURL *)chatImage tag:(int)aTag;
 
+-(void)setHeadImageTest;
+
 @end

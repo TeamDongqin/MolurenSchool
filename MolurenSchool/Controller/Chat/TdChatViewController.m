@@ -31,7 +31,7 @@
     
     // Initialize table view
     msgRecordTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Device_Width, Device_Height) style:UITableViewStyleGrouped];
-    msgRecordTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    msgRecordTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     //[_messageTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     msgRecordTable.scrollEnabled = YES;
     msgRecordTable.dataSource = self;
@@ -61,7 +61,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     [msgRecordTable setBackgroundView:nil];
-    [msgRecordTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //[msgRecordTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     
     
@@ -76,12 +76,17 @@
     [messageText setInputView:nil];
     [messageText resignFirstResponder];
     msgRecords =[TdMessage fetchMessageListWithUser:_chatPerson.userId byPage:1];
+    
+    // Test
+    if (msgRecords.count == 0) {
+        msgRecords = [TdMessage fetchMessageListWithUserTest];
+    }
+    
     if (msgRecords.count!=0) {
         [msgRecordTable reloadData];
         
         [msgRecordTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:msgRecords.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -212,75 +217,67 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return msgRecords.count;
-    return 2;
+    return msgRecords.count;
+    //return 2;
 }
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    static NSString * identifier=@"friendCell";
-//    TdTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
-//    if (!cell) {
-//        cell=[[TdTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-//    }
-//    TdMessage *msg=[msgRecords objectAtIndex:indexPath.row];
-//    [cell setMessageObject:msg];
-//    enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
-//    
-//    switch (style) {
-//        case TdMessageCellStyleMe:
-//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
-//            
-//            break;
-//        case TdMessageCellStyleOther:
-//            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
-//            break;
-//        case TdMessageCellStyleMeWithImage:
-//        {
-//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
-//            
-//        }
-//            break;
-//        case TdMessageCellStyleOtherWithImage:{
-//            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    if ([msg.messageType intValue]==kWCMessageTypeImage) {
-//        style=style==TdMessageCellStyleMe?TdMessageCellStyleMeWithImage:TdMessageCellStyleOtherWithImage;
-//        [cell setChatImage:FILE_BASE_URL(msg.messageContent) tag:indexPath.row*2];
-//    }
-//    
-//    [cell setMsgStyle:style];
-//    
-//    return cell;
-    
     static NSString * identifier=@"friendCell";
     TdTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell=[[TdTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
+    TdMessage *msg=[msgRecords objectAtIndex:indexPath.row];
+    [cell setMessageObject:msg];
+    enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
     
-    cell.textLabel.text = @"Test";
+    style = TdMessageCellStyleOther;
+    
+    switch (style) {
+        case TdMessageCellStyleMe:
+//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+            [cell setHeadImageTest];
+            
+            break;
+        case TdMessageCellStyleOther:
+            //[cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+            [cell setHeadImageTest];
+            break;
+        case TdMessageCellStyleMeWithImage:
+        {
+            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+            
+        }
+            break;
+        case TdMessageCellStyleOtherWithImage:{
+            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if ([msg.messageType intValue]==kWCMessageTypeImage) {
+        style=style==TdMessageCellStyleMe?TdMessageCellStyleMeWithImage:TdMessageCellStyleOtherWithImage;
+        [cell setChatImage:FILE_BASE_URL(msg.messageContent) tag:indexPath.row*2];
+    }
+    
+    [cell setMsgStyle:style];
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if( [[msgRecords[indexPath.row] messageType]intValue]==kWCMessageTypeImage)
-//        return 55+100;
-//    else{
-//        
-//        NSString *orgin=[msgRecords[indexPath.row]messageContent];
-//        CGSize textSize=[orgin sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake((320-HEAD_SIZE-3*INSETS-40), TEXT_MAX_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
-//        return 55+textSize.height;}
-    
-    return 55+100;
+    if( [[msgRecords[indexPath.row] messageType]intValue]==kWCMessageTypeImage)
+        return 55+100;
+    else{
+        
+        NSString *orgin=[msgRecords[indexPath.row]messageContent];
+        CGSize textSize=[orgin sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake((320-HEAD_SIZE-3*INSETS-40), TEXT_MAX_HEIGHT) lineBreakMode:NSLineBreakByWordWrapping];
+        return 55+textSize.height;}
 }
 
 #pragma mark - Notification
