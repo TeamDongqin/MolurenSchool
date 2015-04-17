@@ -62,6 +62,7 @@
 		9C758E8A1AD1154B005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E891AD1154B005EBEAE /* Setting */; };
 		9C758E8C1AD11575005EBEAE /* Setting in Resources */ = {isa = PBXBuildFile; fileRef = 9C758E8B1AD11575005EBEAE /* Setting */; };
 		9CCEEBB31ADD47D100322EE7 /* TdLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */; };
+		9CCFE7AB1AE1448D008598E2 /* TdRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCFE7AA1AE1448D008598E2 /* TdRegisterViewController.m */; };
 		9CD21E051AD55F8F004FDA47 /* CommonSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E041AD55F8F004FDA47 /* CommonSetting.m */; };
 		9CD21E121AD56381004FDA47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E091AD56381004FDA47 /* FMDatabase.m */; };
 		9CD21E131AD56381004FDA47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD21E0B1AD56381004FDA47 /* FMDatabaseAdditions.m */; };
@@ -345,6 +346,8 @@
 		9C758E8B1AD11575005EBEAE /* Setting */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Setting; sourceTree = "<group>"; };
 		9CCEEBB11ADD47D100322EE7 /* TdLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdLoginViewController.h; sourceTree = "<group>"; };
 		9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdLoginViewController.m; sourceTree = "<group>"; };
+		9CCFE7A91AE1448D008598E2 /* TdRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdRegisterViewController.h; sourceTree = "<group>"; };
+		9CCFE7AA1AE1448D008598E2 /* TdRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdRegisterViewController.m; sourceTree = "<group>"; };
 		9CD21E031AD55F8F004FDA47 /* CommonSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonSetting.h; sourceTree = "<group>"; };
 		9CD21E041AD55F8F004FDA47 /* CommonSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonSetting.m; sourceTree = "<group>"; };
 		9CD21E061AD56136004FDA47 /* Prefix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.h; sourceTree = "<group>"; };
@@ -1072,6 +1075,8 @@
 			children = (
 				9CCEEBB11ADD47D100322EE7 /* TdLoginViewController.h */,
 				9CCEEBB21ADD47D100322EE7 /* TdLoginViewController.m */,
+				9CCFE7A91AE1448D008598E2 /* TdRegisterViewController.h */,
+				9CCFE7AA1AE1448D008598E2 /* TdRegisterViewController.m */,
 			);
 			path = "Login&Reg";
 			sourceTree = "<group>";
@@ -2092,6 +2097,7 @@
 				9CD8CD2F1ADA6F2800E8DA23 /* SBJsonStreamParserState.m in Sources */,
 				9C758E661AD113F4005EBEAE /* AppDelegate.m in Sources */,
 				9C378F9F1AD4B5860009528F /* DDMultiFormatter.m in Sources */,
+				9CCFE7AB1AE1448D008598E2 /* TdRegisterViewController.m in Sources */,
 				9CD8CD311ADA6F2800E8DA23 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				9CD8CCEE1ADA622C00E8DA23 /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				9CD228A81ADBF5D3006BD201 /* MMProgressHUDViewController.m in Sources */,
