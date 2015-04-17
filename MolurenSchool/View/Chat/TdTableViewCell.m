@@ -132,7 +132,7 @@
 }
 
 -(void)setHeadImageTest{
-    [_userHead setImage:[UIImage imageNamed:@"DefaultUserPortrait"]];
+    //[_userHead setImage:[UIImage imageNamed:@"DefaultUserPortrait"]];
 }
 
 -(void)setChatImage:(NSURL *)chatImage tag:(int)aTag

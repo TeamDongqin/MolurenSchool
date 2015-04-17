@@ -233,7 +233,7 @@
     [cell setMessageObject:msg];
     enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
     
-    style = TdMessageCellStyleOther;
+    style = (indexPath.row % 2 == 0) ? TdMessageCellStyleMe : TdMessageCellStyleOther;
     
     switch (style) {
         case TdMessageCellStyleMe:

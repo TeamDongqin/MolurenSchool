@@ -47,6 +47,17 @@
         [MoreButton addTarget:self action:@selector(onMoreButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:MoreButton];
+        
+        //Rounded text field
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(35, 7, 210, 30)];
+        
+        [textView.layer setBorderColor:[[[UIColor grayColor] colorWithAlphaComponent:0.2] CGColor]];
+        [textView.layer setBorderWidth:1.0];
+        
+        textView.layer.cornerRadius = 5;
+        textView.clipsToBounds = YES;
+        
+        [self addSubview:textView];
     }
     
     return self;
