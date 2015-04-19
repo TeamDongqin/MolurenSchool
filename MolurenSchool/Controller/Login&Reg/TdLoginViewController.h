@@ -10,17 +10,6 @@
 #import "TdChatViewController.h"
 
 @interface TdLoginViewController : UIViewController
-{
-    UIImageView *_userHead;
-    UILabel *_userLoginName;
-    UITextField *_userPassword;
-    UIButton *_loginButton;
-    UIButton *_registerButton;
-    UINavigationController *mainTab;
-    UITextField *modifiedLoginName;
-    //WCUserProfileViewController *myProfile;
-    
-}
 
 - (void)registerAccount:(id)sender;
 - (void)shiftAccount:(id)sender;

@@ -182,7 +182,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     //
     // If you don't specify a hostPort, then the default (5222) will be used.
     
-    [xmppStream setHostName:kXMPPHost];
+    [xmppStream setHostName:ServerHostName];
     [xmppStream setHostPort:5222];
     
     
@@ -243,8 +243,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         return YES;
     }
     
-    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
-    NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyPassword];
+//    NSString *myJID = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyJID];
+//    NSString *myPassword = [[NSUserDefaults standardUserDefaults] stringForKey:kXMPPmyPassword];
+    
+    NSString *myJID = @"ls@120.27.46.123";
+    NSString *myPassword = @"test";
     
     //
     // If you don't want to use the Settings view to set the JID,
@@ -258,7 +261,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     // ===这句注释掉 改成下面这句   [xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
-    [xmppStream setMyJID:[XMPPJID jidWithUser:myJID domain:@"hcios.com" resource:@"ios"]];
+    //[xmppStream setMyJID:[XMPPJID jidWithUser:myJID domain:@"hcios.com" resource:@"ios"]];
+    [xmppStream setMyJID:[XMPPJID jidWithString:@"ls@120.27.46.123"]];
     password=myPassword;
     
     NSError *error = nil;
