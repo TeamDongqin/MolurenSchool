@@ -31,7 +31,7 @@
     
     // Initialize table view
     msgRecordTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Device_Width, Device_Height) style:UITableViewStyleGrouped];
-    msgRecordTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    msgRecordTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     //[_messageTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     msgRecordTable.scrollEnabled = YES;
     msgRecordTable.dataSource = self;
@@ -61,7 +61,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeKeyBoard:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     [msgRecordTable setBackgroundView:nil];
-    [msgRecordTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //[msgRecordTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     
     
@@ -76,12 +76,17 @@
     [messageText setInputView:nil];
     [messageText resignFirstResponder];
     msgRecords =[TdMessage fetchMessageListWithUser:_chatPerson.userId byPage:1];
+    
+    // Test
+    if (msgRecords.count == 0) {
+        msgRecords = [TdMessage fetchMessageListWithUserTest];
+    }
+    
     if (msgRecords.count!=0) {
         [msgRecordTable reloadData];
         
         [msgRecordTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:msgRecords.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -213,6 +218,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return msgRecords.count;
+    //return 2;
 }
 
 
@@ -227,13 +233,17 @@
     [cell setMessageObject:msg];
     enum TdMessageCellStyle style=[msg.messageFrom isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:kXMPPmyJID]]?TdMessageCellStyleMe:TdMessageCellStyleOther;
     
+    style = (indexPath.row % 2 == 0) ? TdMessageCellStyleMe : TdMessageCellStyleOther;
+    
     switch (style) {
         case TdMessageCellStyleMe:
-            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+//            [cell setHeadImage:FILE_BASE_URL([[NSUserDefaults standardUserDefaults]objectForKey:kMY_USER_Head]) tag:indexPath.row];
+            [cell setHeadImageTest];
             
             break;
         case TdMessageCellStyleOther:
-            [cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+            //[cell setHeadImage:FILE_BASE_URL(_chatPerson.userHead) tag:indexPath.row];
+            [cell setHeadImageTest];
             break;
         case TdMessageCellStyleMeWithImage:
         {
@@ -252,22 +262,7 @@
     if ([msg.messageType intValue]==kWCMessageTypeImage) {
         style=style==TdMessageCellStyleMe?TdMessageCellStyleMeWithImage:TdMessageCellStyleOtherWithImage;
         [cell setChatImage:FILE_BASE_URL(msg.messageContent) tag:indexPath.row*2];
-        
-        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        //            UIImage *image=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg.messageContent]]];
-        //            dispatch_async(dispatch_get_main_queue(), ^{
-        //                [cell setChatImage:image];
-        //            });
-        //
-        //
-        //        });
-        
-        
-        //UIImage *img=[Photo string2Image:msg.messageContent];
-        //[cell setChatImage:[Photo string2Image:msg.messageContent ]];
-        //  [msg setMessageContent:@""];
     }
-    
     
     [cell setMsgStyle:style];
     

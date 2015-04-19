@@ -108,6 +108,28 @@
     
 }
 
++(NSMutableArray *)fetchMessageListWithUserTest{
+    NSMutableArray *messageList=[[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < 10; i++) {
+        NSDate *currDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm"];
+        NSString *dateString = [dateFormatter stringFromDate:currDate];
+        
+        TdMessage *message=[[TdMessage alloc]init];
+        [message setMessageId:[NSNumber numberWithInt:i]];
+        [message setMessageContent:@"TestNowsdfasfasdfasfasdfasdfasdfasdfasfdasdfasdfADSAFASDFASFSADFASDFASFASF"];
+        [message setMessageDate:currDate];
+        [message setMessageFrom:@"TestFromMessage"];
+        [message setMessageTo:@"TestToMessage"];
+        [message setMessageType:[NSNumber numberWithInt:0]];
+        [ messageList addObject:message];
+    }
+
+    return  messageList;
+}
+
 //获取最近联系人
 +(NSMutableArray *)fetchRecentChatByPage:(int)pageIndex
 {

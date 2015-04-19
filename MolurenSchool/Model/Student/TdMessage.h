@@ -30,6 +30,8 @@
 // Fetch specified user chat history
 +(NSMutableArray *)fetchMessageListWithUser:(NSString *)userId byPage:(int)pageIndex;
 
++(NSMutableArray *)fetchMessageListWithUserTest;
+
 // Fetch recent contact
 +(NSMutableArray *)fetchRecentChatByPage:(int)pageIndex;
 

@@ -37,7 +37,7 @@
         [self.contentView addSubview:_chatImage];
         // [_chatImage setBackgroundColor:[UIColor redColor]];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [_headMask setImage:[[UIImage imageNamed:@"UserHeaderImageBox"]stretchableImageWithLeftCapWidth:10 topCapHeight:10]];
+        [_headMask setImage:[[UIImage imageNamed:@"DefaultUserPortrait"]stretchableImageWithLeftCapWidth:10 topCapHeight:10]];
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
@@ -62,7 +62,7 @@
             [_messageConent setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-textSize.width-15, (CELL_HEIGHT-textSize.height)/2, textSize.width, textSize.height)];
             [_userHead setFrame:CGRectMake(CELL_WIDTH-INSETS-HEAD_SIZE, INSETS,HEAD_SIZE , HEAD_SIZE)];
             
-            [_bubbleBg setImage:[[UIImage imageNamed:@"SenderTextNodeBkg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
+            [_bubbleBg setImage:[[UIImage imageNamed:@"SenderBubbleBgImg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
             _bubbleBg.frame=CGRectMake(_messageConent.frame.origin.x-15, _messageConent.frame.origin.y-12, textSize.width+30, textSize.height+30);
         }
             break;
@@ -74,7 +74,7 @@
             [_messageConent setFrame:CGRectMake(2*INSETS+HEAD_SIZE+15, (CELL_HEIGHT-textSize.height)/2, textSize.width, textSize.height)];
             
             
-            [_bubbleBg setImage:[[UIImage imageNamed:@"ReceiverTextNodeBkg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
+            [_bubbleBg setImage:[[UIImage imageNamed:@"ReceiverBubbleBgImg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
             _bubbleBg.frame=CGRectMake(_messageConent.frame.origin.x-15, _messageConent.frame.origin.y-12, textSize.width+30, textSize.height+30);
         }
             break;
@@ -86,7 +86,7 @@
             [_chatImage setFrame:CGRectMake(CELL_WIDTH-INSETS*2-HEAD_SIZE-115, (CELL_HEIGHT-100)/2, 100, 100)];
             [_userHead setFrame:CGRectMake(CELL_WIDTH-INSETS-HEAD_SIZE, INSETS,HEAD_SIZE , HEAD_SIZE)];
             
-            [_bubbleBg setImage:[[UIImage imageNamed:@"SenderTextNodeBkg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
+            [_bubbleBg setImage:[[UIImage imageNamed:@"SenderBubbleBgImg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
             _bubbleBg.frame=CGRectMake(_chatImage.frame.origin.x-15, _chatImage.frame.origin.y-12, 100+30, 100+30);
         }
             break;
@@ -97,7 +97,7 @@
             [_chatImage setFrame:CGRectMake(2*INSETS+HEAD_SIZE+15, (CELL_HEIGHT-100)/2,100,100)];
             [_userHead setFrame:CGRectMake(INSETS, INSETS,HEAD_SIZE , HEAD_SIZE)];
             
-            [_bubbleBg setImage:[[UIImage imageNamed:@"ReceiverTextNodeBkg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
+            [_bubbleBg setImage:[[UIImage imageNamed:@"ReceiverBubbleBgImg"]stretchableImageWithLeftCapWidth:20 topCapHeight:30]];
             
             _bubbleBg.frame=CGRectMake(_chatImage.frame.origin.x-15, _chatImage.frame.origin.y-12, 100+30, 100+30);
             
@@ -130,6 +130,11 @@
     [_userHead setTag:aTag];
     [_userHead setWebImage:headImage placeHolder:Nil downloadFlag:aTag];
 }
+
+-(void)setHeadImageTest{
+    //[_userHead setImage:[UIImage imageNamed:@"DefaultUserPortrait"]];
+}
+
 -(void)setChatImage:(NSURL *)chatImage tag:(int)aTag
 {
     [_chatImage setTag:aTag];
