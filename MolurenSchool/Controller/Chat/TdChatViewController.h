@@ -12,7 +12,7 @@
 #import "TdStudent.h"
 #import "TdChatSendMsgView.h"
 
-@interface TdChatViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TdAdvancedChatFeatureDelegate>
+@interface TdChatViewController : UIViewController<UINavigationControllerDelegate>
 {
     IBOutlet UITableView *msgRecordTable;
     NSMutableArray *msgRecords;

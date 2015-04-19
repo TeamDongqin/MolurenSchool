@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UILabel *_userLoginName;
 @property (nonatomic, strong) UITextField *_userPassword;
 @property (nonatomic, strong) UIButton *_loginButton;
-@property (nonatomic, strong) UIButton *_registerButton;
+@property (nonatomic, strong) UIButton *_logoutButton;
 @property (nonatomic, strong) UINavigationController *mainTab;
 @property (nonatomic, strong) UITextField *modifiedLoginName;
 //@property (nonatomic, strong) WCUserProfileViewController *myProfile;
@@ -24,7 +24,7 @@
 
 @implementation TdLoginViewController
 
-@synthesize _userHead, _userLoginName, _userPassword, _loginButton, _registerButton, mainTab, modifiedLoginName;
+@synthesize _userHead, _userLoginName, _userPassword, _loginButton, _logoutButton, mainTab, modifiedLoginName;
 
 #pragma mark - View life cycle
 
@@ -50,13 +50,13 @@
     [self.view addSubview:_loginButton];
     
     //注册按钮
-    _registerButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
-    [_registerButton setTitle:@"Register" forState:UIControlStateNormal];
-    [_registerButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [_registerButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
-    [_registerButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
+    _logoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
+    [_logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    [_logoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [_logoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [_logoutButton addTarget:self action:@selector(TestStartLogout) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:_registerButton];
+    [self.view addSubview:_logoutButton];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
@@ -222,8 +222,8 @@
     [[TdServerManager Instance] connect];
 }
 
--(void)TestStartRegister{
-    
+-(void)TestStartLogout{
+    [[TdServerManager Instance] disconnect];
 }
                           
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
