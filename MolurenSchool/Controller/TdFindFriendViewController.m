@@ -7,6 +7,7 @@
 //
 
 #import "TdFindFriendViewController.h"
+#import "TdFindFriendViewCellController.h"
 
 @interface TdFindFriendViewController()
 
@@ -38,8 +39,8 @@
     
     [self findFriends];
     
-//    [_friendTable registerNib:[UINib nibWithNibName:@"WCFriendCell" bundle:nil] forCellReuseIdentifier:@"friendCell"];
-//    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"WCFriendCell" bundle:nil] forCellReuseIdentifier:@"friendCell"];
+    [_friendTable registerNib:[UINib nibWithNibName:@"TdFindFriendViewCell" bundle:nil] forCellReuseIdentifier:@"friendCell"];
+    [self.searchDisplayController.searchResultsTableView registerNib:[UINib nibWithNibName:@"TdFindFriendViewCell" bundle:nil] forCellReuseIdentifier:@"friendCell"];
     
 }
 
