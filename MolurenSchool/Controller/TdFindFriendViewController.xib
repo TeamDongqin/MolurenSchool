@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="_friendTable" destination="L25-Vl-JaM" id="fNM-0v-8gS"/>
                 <outlet property="findView" destination="Uzv-5g-uqy" id="kYU-mW-b2A"/>
+                <outlet property="refreshView" destination="QYH-22-cKy" id="gmq-o8-YSX"/>
                 <outlet property="web" destination="AMk-HV-LOJ" id="ckn-Ln-4UQ"/>
             </connections>
         </placeholder>
@@ -36,6 +37,10 @@
                         <action selector="searchUser:" destination="-1" eventType="touchDown" id="7dN-jI-eDz"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QYH-22-cKy">
+                    <rect key="frame" x="235" y="75" width="77" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="51" y="391"/>

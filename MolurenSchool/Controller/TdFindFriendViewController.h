@@ -23,7 +23,7 @@
     int _pageIndex;
     int _pageSize;
     
-//    IBOutlet UIImageView *refreshView;
+    IBOutlet UIImageView *refreshView;
 }
 
 - (IBAction)searchUser:(id)sender;

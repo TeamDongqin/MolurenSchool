@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+RZWebImage.h"
 
 @interface TdFindFriendViewCell : UITableViewCell
 
