@@ -60,4 +60,7 @@
 // File Transfer
 -(void)sendFile:(NSData*)aData toJID:(XMPPJID*)aJID;
 
+// Register
+-(void)ProcessRegisterRequest;
+
 @end

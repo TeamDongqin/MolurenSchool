@@ -17,6 +17,14 @@
 #define API_BASE_URL(_URL_) [NSURL URLWithString:[@"http://115.29.150.153/api/" stringByAppendingString:_URL_]]
 #define FILE_BASE_URL(_FILE_) [NSURL URLWithString:[@"http://115.29.150.153/" stringByAppendingString:_FILE_]]
 
+// UIColor from rgb
+#define UIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
+
 #define ServerHostName @"120.27.46.123"
 
 // Portrait
@@ -35,5 +43,8 @@
 // Chat advanced feature view
 #define CHAT_BUTTON_SIZE 70
 #define INSETS 10
+
+// Login view controller background color
+#define COLOR_LOGINVCBG     0xE5E5E5
 
 @end

@@ -11,11 +11,11 @@
 
 @interface TdLoginViewController ()
 
-@property (nonatomic, strong) UIImageView *_userHead;
-@property (nonatomic, strong) UILabel *_userLoginName;
-@property (nonatomic, strong) UITextField *_userPassword;
-@property (nonatomic, strong) UIButton *_loginButton;
-@property (nonatomic, strong) UIButton *_logoutButton;
+@property (nonatomic, strong) UIImageView *UserPortrait;
+@property (nonatomic, strong) UILabel *UserLoginName;
+@property (nonatomic, strong) UITextField *UserPassword;
+@property (nonatomic, strong) UIButton *LoginButton;
+@property (nonatomic, strong) UIButton *LogoutButton;
 @property (nonatomic, strong) UINavigationController *mainTab;
 @property (nonatomic, strong) UITextField *modifiedLoginName;
 //@property (nonatomic, strong) WCUserProfileViewController *myProfile;
@@ -24,7 +24,7 @@
 
 @implementation TdLoginViewController
 
-@synthesize _userHead, _userLoginName, _userPassword, _loginButton, _logoutButton, mainTab, modifiedLoginName;
+@synthesize UserPortrait, UserLoginName, UserPassword, LoginButton, LogoutButton, mainTab, modifiedLoginName;
 
 #pragma mark - View life cycle
 
@@ -35,28 +35,42 @@
 }
 
 -(void)setup{
-    //用户头像
-    //    [_userHead.layer setShadowColor:[UIColor blackColor].CGColor];
-    //    [_userHead.layer setShadowOffset:CGSizeMake(-1, -1)];
-    //    [_userHead.layer setShadowOpacity:0.5f];
+    
+    // Background set up
+    self.view.backgroundColor = UIColorFromRGB(COLOR_LOGINVCBG);
+    
+    // User portrait
+    UserPortrait = [[UIImageView alloc] initWithFrame:CGRectMake(120, 100, 85, 85)];
+    UserPortrait.image = [UIImage imageNamed:@"SampleLoginPortrait"];
+    
+    [self.view addSubview:UserPortrait];
     
     //登陆按钮
-    _loginButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 250, 50)];
-    [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    [_loginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn_Hl"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [_loginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
-    [_loginButton addTarget:self action:@selector(TestStartLogin) forControlEvents:UIControlEventTouchUpInside];
+    LoginButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 250, 50)];
+    [LoginButton setTitle:@"Login" forState:UIControlStateNormal];
+    [LoginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn_Hl"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [LoginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [LoginButton addTarget:self action:@selector(TestStartLogin) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:_loginButton];
+    [self.view addSubview:LoginButton];
     
     //注册按钮
-    _logoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
-    [_logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
-    [_logoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [_logoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
-    [_logoutButton addTarget:self action:@selector(TestStartLogout) forControlEvents:UIControlEventTouchUpInside];
+    LogoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
+    [LogoutButton setTitle:@"Logout" forState:UIControlStateNormal];
+    [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [LogoutButton addTarget:self action:@selector(TestStartLogout) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:_logoutButton];
+    [self.view addSubview:LogoutButton];
+    
+    // Register button
+    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 400, 250, 50)];
+    [RegisterButton setTitle:@"Register" forState:UIControlStateNormal];
+    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:RegisterButton];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
@@ -225,11 +239,15 @@
 -(void)TestStartLogout{
     [[TdServerManager Instance] disconnect];
 }
+
+-(void)TestStartRegister{
+    [[TdServerManager Instance] ProcessRegisterRequest];
+}
                           
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (modifiedLoginName.text.length!=0) {
-        [_userLoginName setText:modifiedLoginName.text];
+        [UserLoginName setText:modifiedLoginName.text];
     }
     [modifiedLoginName setHidden:YES];
     

@@ -126,11 +126,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     xmppStream = [[XMPPStream alloc] init];
     
-#if !TARGET_IPHONE_SIMULATOR
+//#if !TARGET_IPHONE_SIMULATOR
     {
         xmppStream.enableBackgroundingOnSocket = YES;
     }
-#endif
+//#endif
     
     
     
@@ -545,6 +545,36 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void)requestError:(ASIFormDataRequest*)request
 {
     
+}
+
+#pragma mark - Process register request
+
+-(void)ProcessRegisterRequest{
+    NSString *username = @"rohit@XMPP_SERVER_IP_HERE"; // OR [NSString stringWithFormat:@"%@@%@",username,XMPP_BASE_URL]]
+    NSString *password = @"Test";
+    
+    xmppStream.myJID = [XMPPJID jidWithString:@"TestIOS"];
+    
+    //NSLog(@"Does supports registration %ub ", );
+    NSLog(@"Attempting registration for username %@",xmppStream.myJID.bare);
+    
+    //if (xmppStream.supportsInBandRegistration) {
+        NSError *error = nil;
+        if (![xmppStream registerWithPassword:password error:&error])
+        {
+            NSLog(@"Oops, I forgot something: %@", error);
+        }else{
+            NSLog(@"No Error");
+        }
+    //}
+}
+
+-(void)xmppStreamDidRegister:(XMPPStream *)sender{
+    NSLog(@"Register success");
+}
+
+-(void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error{
+    NSLog(@"Register failed");
 }
 
 @end
