@@ -7,7 +7,7 @@
 //
 
 #import "TdLoginViewController.h"
-#import "TdServerManager.h"
+#import "TdServerConnectorMgr.h"
 
 @interface TdLoginViewController ()
 
@@ -71,6 +71,15 @@
     [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:RegisterButton];
+    
+    // Register button
+    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 500, 250, 50)];
+    [AddFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
+    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [AddFriendButton addTarget:self action:@selector(TestStartAddFriend) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:AddFriendButton];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
@@ -233,15 +242,19 @@
 }
 
 -(void)TestStartLogin{
-    [[TdServerManager Instance] connect];
+    [[TdServerConnectorMgr Instance] Login:@"test" withPassword:@"test"];
 }
 
 -(void)TestStartLogout{
-    [[TdServerManager Instance] disconnect];
+    [[TdServerConnectorMgr Instance] disconnect];
 }
 
 -(void)TestStartRegister{
-    [[TdServerManager Instance] ProcessRegisterRequest];
+    [[TdServerConnectorMgr Instance] Register:@"test" withPassword:@"test"];
+}
+
+-(void)TestStartAddFriend{
+    [[TdServerConnectorMgr Instance] addSomeBody:@"ls"];
 }
                           
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

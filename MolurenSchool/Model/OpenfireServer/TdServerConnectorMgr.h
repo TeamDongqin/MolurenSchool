@@ -11,7 +11,7 @@
 #import "XMPPFramework.h"
 
 @class XMPPMessage,XMPPRoster,XMPPRosterCoreDataStorage;
-@interface TdServerManager : NSObject<UIApplicationDelegate>
+@interface TdServerConnectorMgr : NSObject<UIApplicationDelegate>
 {
     XMPPStream *xmppStream;
     XMPPReconnect *xmppReconnect;
@@ -32,7 +32,7 @@
 @property (readonly, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-+ (TdServerManager*)Instance;
++ (TdServerConnectorMgr*)Instance;
 
 // Init
 -(void)Init;
@@ -42,7 +42,10 @@
 - (NSURL *)applicationDocumentsDirectory;
 
 - (BOOL)connect;
-- (void)disconnect;
+- (BOOL)disconnect;
+
+-(void)Login:(NSString*)UserName withPassword:(NSString*)Password;
+-(void)Register:(NSString*)UserName withPassword:(NSString*)Password;
 
 // Set up xml stream
 - (void)setupStream;

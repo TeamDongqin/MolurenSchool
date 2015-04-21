@@ -8,7 +8,7 @@
 
 #import "TdChatViewController.h"
 #import "TdAdvancedChatFeatureView.h"
-#import "TdServerManager.h"
+#import "TdServerConnectorMgr.h"
 #import "TdMessage.h"
 #import "TdTableViewCell.h"
 
@@ -148,7 +148,7 @@
     [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:msgJson]];
     
     //发送消息
-    [[TdServerManager Instance] sendMessage:mes];
+    [[TdServerConnectorMgr Instance] sendMessage:mes];
     
     [messageText setText:nil];
     
@@ -189,7 +189,7 @@
         [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:msgJson]];
         
         //发送消息
-        [[TdServerManager Instance] sendMessage:mes];
+        [[TdServerConnectorMgr Instance] sendMessage:mes];
         
         
     }];

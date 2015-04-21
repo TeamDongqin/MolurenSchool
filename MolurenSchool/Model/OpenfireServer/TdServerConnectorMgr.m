@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 TeamDQ. All rights reserved.
 //
 
-#import "TdServerManager.h"
+#import "TdServerConnectorMgr.h"
 #import "GCDAsyncSocket.h"
 #import "XMPP.h"
 #import "XMPPReconnect.h"
@@ -28,17 +28,28 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 static const int ddLogLevel = LOG_LEVEL_INFO;
 #endif
 
-@interface TdServerManager()
+enum TdConnectType {
+    TdConnectTypeRegister        =   0,
+    TdConnectTypeLogin           =   1
+};
 
-@property (strong, nonatomic) TdServerManager* TdServerMgr;
+@interface TdServerConnectorMgr()
+
+@property (strong, nonatomic) TdServerConnectorMgr* TdServerMgr;
+
+@property enum TdConnectType CurrentConnectType;
+@property NSString* CurrentUserName;
+@property NSString* CurrentPassword;
 
 @end
 
-@implementation TdServerManager
+@implementation TdServerConnectorMgr
+
+@synthesize TdServerMgr, CurrentConnectType, CurrentPassword, CurrentUserName;
 
 #pragma mark - Initialization & clean up
 
-+ (TdServerManager*)Instance
++ (TdServerConnectorMgr*)Instance
 {
     static dispatch_once_t predicate = 0;
     __strong static id sharedObject = nil;
@@ -193,9 +204,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     allowSSLHostNameMismatch = NO;
     
     
-    if (![self connect]) {
-        [[[UIAlertView alloc]initWithTitle:@"服务器连接失败" message:@"ps:本demo服务器非24小时开启，若急需请QQ 109327402" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil]show];
-    };
+//    if (![self connect]) {
+//        [[[UIAlertView alloc]initWithTitle:@"服务器连接失败" message:@"ps:本demo服务器非24小时开启，若急需请QQ 109327402" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil]show];
+//    };
 }
 
 - (void)teardownStream
@@ -284,10 +295,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return YES;
 }
 
-- (void)disconnect
+- (BOOL)disconnect
 {
     [self goOffline];
     [xmppStream disconnect];
+    return YES;
 }
 
 #pragma mark - App operations(delegate)
@@ -399,12 +411,46 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     isXmppConnected = YES;
     
-    NSError *error = nil;
-    
-    if (![xmppStream authenticateWithPassword:password error:&error])
-    {
-        DDLogError(@"Error authenticating: %@", error);
+    switch (CurrentConnectType) {
+        case TdConnectTypeLogin:
+        {
+            NSError *error = nil;
+            
+            if (![xmppStream authenticateWithPassword:CurrentPassword error:&error])
+            {
+                DDLogError(@"Error authenticating: %@", error);
+            }
+            
+            CurrentUserName = @"";
+            CurrentPassword = @"";
+        }
+            break;
+        case TdConnectTypeRegister:
+        {
+            NSString* jid = [[NSString alloc] initWithFormat:@"%@@%@", CurrentUserName, ServerHostName];
+            [xmppStream setMyJID:[XMPPJID jidWithString:jid]];
+            NSError *error=nil;
+            
+            //if(xmppStream.supportsInBandRegistration){
+            if (![xmppStream registerWithPassword:CurrentPassword error:&error])
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"创建帐号失败"
+                                                                    message:[error localizedDescription]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Ok"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            }
+            //}
+            
+            CurrentUserName = @"";
+            CurrentPassword = @"";
+        }
+            break;
+        default:
+            break;
     }
+
 }
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
@@ -512,7 +558,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)addSomeBody:(NSString *)userId
 {
-    [xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@hcios.com",userId]]];
+    [xmppRoster subscribePresenceToUser:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@120.27.46.123",userId]]];
 }
 
 -(void)fetchUser:(NSString*)userId
@@ -542,6 +588,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
 }
+
 -(void)requestError:(ASIFormDataRequest*)request
 {
     
@@ -549,24 +596,50 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 #pragma mark - Process register request
 
--(void)ProcessRegisterRequest{
-    NSString *username = @"rohit@XMPP_SERVER_IP_HERE"; // OR [NSString stringWithFormat:@"%@@%@",username,XMPP_BASE_URL]]
-    NSString *password = @"Test";
+-(void)Login:(NSString*)UserName withPassword:(NSString*)Password{
+    //    if (![xmppStream isDisconnected]) {
+    //        return YES;
+    //    }
+    NSString* myJID = [[NSString alloc] initWithFormat:@"%@@%@", UserName, ServerHostName];
+    [xmppStream setMyJID:[XMPPJID jidWithString:myJID]];
     
-    xmppStream.myJID = [XMPPJID jidWithString:@"TestIOS"];
+    NSError *error = nil;
+    if(![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error connecting"
+                                                            message:@"See console for error details."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        
+        DDLogError(@"Error connecting: %@", error);
+    }
     
-    //NSLog(@"Does supports registration %ub ", );
-    NSLog(@"Attempting registration for username %@",xmppStream.myJID.bare);
+    CurrentConnectType = TdConnectTypeLogin;
+    CurrentUserName = UserName;
+    CurrentPassword = Password;
+}
+
+-(void)Register:(NSString*)UserName withPassword:(NSString*)Password{
     
-    //if (xmppStream.supportsInBandRegistration) {
-        NSError *error = nil;
-        if (![xmppStream registerWithPassword:password error:&error])
-        {
-            NSLog(@"Oops, I forgot something: %@", error);
-        }else{
-            NSLog(@"No Error");
-        }
-    //}
+    NSError *err;
+    NSString *jid = [[NSString alloc] initWithFormat:@"anonymous@%@", ServerHostName];
+    [xmppStream setMyJID:[XMPPJID jidWithString:jid]];
+    if ( ![xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&err])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"连接服务器失败"
+                                                            message:[err localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        
+    }
+    
+    CurrentConnectType = TdConnectTypeRegister;
+    CurrentUserName = UserName;
+    CurrentPassword = Password;
 }
 
 -(void)xmppStreamDidRegister:(XMPPStream *)sender{

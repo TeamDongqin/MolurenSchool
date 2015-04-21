@@ -217,7 +217,7 @@
 		9CD8CD541ADA72EF00E8DA23 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CD491ADA72EF00E8DA23 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CD8CD551ADA72EF00E8DA23 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8CD4C1ADA72EF00E8DA23 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CD8CD5C1ADA78D800E8DA23 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD8CD5A1ADA788A00E8DA23 /* libz.dylib */; };
-		9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerManager.m */; };
+		9CDB38FE1AD75A9E00024391 /* TdServerConnectorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB38FD1AD75A9E00024391 /* TdServerConnectorMgr.m */; };
 		9CDD773E1ADC9AD70097942F /* TdChatSendMsgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD773D1ADC9AD70097942F /* TdChatSendMsgView.m */; };
 		9CDD77421ADCA1C40097942F /* TdUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDD77411ADCA1C40097942F /* TdUtilities.m */; };
 /* End PBXBuildFile section */
@@ -658,8 +658,8 @@
 		9CD8CD4B1ADA72EF00E8DA23 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		9CD8CD4C1ADA72EF00E8DA23 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		9CD8CD5A1ADA788A00E8DA23 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		9CDB38FC1AD75A9E00024391 /* TdServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerManager.h; sourceTree = "<group>"; };
-		9CDB38FD1AD75A9E00024391 /* TdServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerManager.m; sourceTree = "<group>"; };
+		9CDB38FC1AD75A9E00024391 /* TdServerConnectorMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdServerConnectorMgr.h; sourceTree = "<group>"; };
+		9CDB38FD1AD75A9E00024391 /* TdServerConnectorMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdServerConnectorMgr.m; sourceTree = "<group>"; };
 		9CDB38FF1AD75C2700024391 /* XMPPFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		9CDD773C1ADC9AD70097942F /* TdChatSendMsgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TdChatSendMsgView.h; sourceTree = "<group>"; };
 		9CDD773D1ADC9AD70097942F /* TdChatSendMsgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TdChatSendMsgView.m; sourceTree = "<group>"; };
@@ -1196,8 +1196,8 @@
 		9CD7BB4B1AD6041300322380 /* OpenfireServer */ = {
 			isa = PBXGroup;
 			children = (
-				9CDB38FC1AD75A9E00024391 /* TdServerManager.h */,
-				9CDB38FD1AD75A9E00024391 /* TdServerManager.m */,
+				9CDB38FC1AD75A9E00024391 /* TdServerConnectorMgr.h */,
+				9CDB38FD1AD75A9E00024391 /* TdServerConnectorMgr.m */,
 			);
 			path = OpenfireServer;
 			sourceTree = "<group>";
@@ -2178,7 +2178,7 @@
 				9CCEEBB31ADD47D100322EE7 /* TdLoginViewController.m in Sources */,
 				9C37902E1AD4B8BD0009528F /* XMPPPlainAuthentication.m in Sources */,
 				9CD8CCF31ADA622C00E8DA23 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
-				9CDB38FE1AD75A9E00024391 /* TdServerManager.m in Sources */,
+				9CDB38FE1AD75A9E00024391 /* TdServerConnectorMgr.m in Sources */,
 				9CD8CD4D1ADA72EF00E8DA23 /* ASIAuthenticationDialog.m in Sources */,
 				9CD8CCE21ADA622C00E8DA23 /* TURNSocket.m in Sources */,
 				9CD8CCE81ADA622C00E8DA23 /* XMPPMessage+XEP_0085.m in Sources */,
