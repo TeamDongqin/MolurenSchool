@@ -8,6 +8,7 @@
 
 #import "TdLoginViewController.h"
 #import "TdServerConnectorMgr.h"
+#import "NSObject+SBJson.h"
 
 @interface TdLoginViewController ()
 
@@ -55,7 +56,7 @@
     [self.view addSubview:LoginButton];
     
     //注册按钮
-    LogoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
+    LogoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 250, 250, 50)];
     [LogoutButton setTitle:@"Logout" forState:UIControlStateNormal];
     [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
     [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
@@ -64,7 +65,7 @@
     [self.view addSubview:LogoutButton];
     
     // Register button
-    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 400, 250, 50)];
+    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
     [RegisterButton setTitle:@"Register" forState:UIControlStateNormal];
     [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
     [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
@@ -73,13 +74,22 @@
     [self.view addSubview:RegisterButton];
     
     // Register button
-    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 500, 250, 50)];
+    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 350, 250, 50)];
     [AddFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
     [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
     [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
     [AddFriendButton addTarget:self action:@selector(TestStartAddFriend) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:AddFriendButton];
+    
+    // Chat button
+    UIButton* ChatButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 400, 250, 50)];
+    [ChatButton setTitle:@"Test chat" forState:UIControlStateNormal];
+    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
+    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [ChatButton addTarget:self action:@selector(TestChat) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:ChatButton];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
@@ -256,7 +266,23 @@
 -(void)TestStartAddFriend{
     [[TdServerConnectorMgr Instance] addSomeBody:@"ls"];
 }
-                          
+
+-(void)TestChat{
+    // NSLog(@"消息发送成功");
+    NSString *message = @"I'm test";
+    
+    NSDictionary *messageDic=[NSDictionary dictionaryWithObjectsAndKeys:@"",@"file",[NSNumber numberWithInt:kWCMessageTypePlain],@"messageType", message,@"text", nil];
+    NSString *msgJson=[messageDic JSONRepresentation];
+    NSLog(@"发送json:%@",msgJson);
+    //生成消息对象
+    NSString* targetJID = [[NSString alloc] initWithFormat:@"%@@%@", @"ls", ServerHostName];
+    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:targetJID]];
+    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:msgJson]];
+    
+    //发送消息
+    [[TdServerConnectorMgr Instance] sendMessage:mes];
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (modifiedLoginName.text.length!=0) {
