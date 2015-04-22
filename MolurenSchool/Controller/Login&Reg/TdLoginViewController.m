@@ -41,50 +41,122 @@
     self.view.backgroundColor = UIColorFromRGB(COLOR_LOGINVCBG);
     
     // User portrait
-    UserPortrait = [[UIImageView alloc] initWithFrame:CGRectMake(120, 100, 85, 85)];
+    UserPortrait = [[UIImageView alloc] init];
     UserPortrait.image = [UIImage imageNamed:@"SampleLoginPortrait"];
     
     [self.view addSubview:UserPortrait];
     
     // Login button
-    LoginButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 250, 50)];
-    [LoginButton setTitle:@"Login" forState:UIControlStateNormal];
+    LoginButton = [[UIButton alloc] init];
+    [LoginButton setTitle:@"登录" forState:UIControlStateNormal];
     [LoginButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
     [LoginButton addTarget:self action:@selector(TestStartLogin) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:LoginButton];
     
-    // Register button
-    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 320, 250, 50)];
-    [RegisterButton setTitle:@"Register" forState:UIControlStateNormal];
-    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
-    [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:RegisterButton];
-    
-    // Add friend button
-    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 380, 250, 50)];
-    [AddFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
-    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
-    [AddFriendButton addTarget:self action:@selector(TestStartAddFriend) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:AddFriendButton];
-    
-    // Chat button
-    UIButton* ChatButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 440, 250, 50)];
-    [ChatButton setTitle:@"Test chat" forState:UIControlStateNormal];
-    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
-    [ChatButton addTarget:self action:@selector(TestChat) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:ChatButton];
-    
     // User password text field
-    UserPassword = [[UITextField alloc] initWithFrame:CGRectMake(30, 260, 250, 40)];
+    UserPassword = [[UITextField alloc] init];
+    //UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    UIImageView* paddingView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 1, 38, 41)];
+    paddingView.image = [UIImage imageNamed:@"TempLockImage"];
+    UserPassword.leftView = paddingView;
+    UserPassword.leftViewMode = UITextFieldViewModeAlways;
     UserPassword.placeholder = @"请输入密码";
-    
     UserPassword.background = [[UIImage imageNamed:@"BtnTemplate_DefaultWhite"] stretchableImageWithLeftCapWidth:9 topCapHeight:9];
     
     [self.view  addSubview:UserPassword];
+    
+    // User login name
+    UserLoginName = [[UILabel alloc] init];
+    UserLoginName.text = @"774761506";
+    UserLoginName.textColor = [UIColor blackColor];
+    UserLoginName.textAlignment = UITextAlignmentCenter;
+    UserLoginName.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    
+    [self.view addSubview:UserLoginName];
+    
+    [self ApplyConstraints];
+    
+//    // Register button
+//    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 320, 250, 50)];
+//    [RegisterButton setTitle:@"Register" forState:UIControlStateNormal];
+//    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
+//    [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:RegisterButton];
+//
+//    // Add friend button
+//    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 380, 250, 50)];
+//    [AddFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
+//    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
+//    [AddFriendButton addTarget:self action:@selector(TestStartAddFriend) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [self.view addSubview:AddFriendButton];
+//
+//    // Chat button
+//    UIButton* ChatButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 440, 250, 50)];
+//    [ChatButton setTitle:@"Test chat" forState:UIControlStateNormal];
+//    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
+//    [ChatButton addTarget:self action:@selector(TestChat) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.view addSubview:ChatButton];
+}
+
+-(void)ApplyConstraints{
+    // Login button
+    [LoginButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:LoginButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:LoginButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:LoginButton attribute:NSLayoutAttributeCenterX
+        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:LoginButton attribute:NSLayoutAttributeTop
+        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:10]];
+    
+    // User password text field
+    [UserPassword setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPassword attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPassword attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPassword attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPassword attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:-10]];
+    
+    // User login name
+    [UserLoginName setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:100]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeHeight  relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual toItem:UserPassword
+                                                          attribute:NSLayoutAttributeTop multiplier:1.0 constant:-20]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual toItem:UserPortrait
+                                                          attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5]];
+    
+    // User portrait
+    [UserPortrait setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPortrait attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:85]]; // 85 - whole, 80 - image width
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPortrait attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:85]]; // 85 - whole, 80 - image width
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPortrait attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
