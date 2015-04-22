@@ -46,50 +46,45 @@
     
     [self.view addSubview:UserPortrait];
     
-    //登陆按钮
+    // Login button
     LoginButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 200, 250, 50)];
     [LoginButton setTitle:@"Login" forState:UIControlStateNormal];
-    [LoginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn_Hl"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [LoginButton setBackgroundImage:[[UIImage imageNamed:@"LoginGreenBigBtn"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [LoginButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
     [LoginButton addTarget:self action:@selector(TestStartLogin) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:LoginButton];
     
-    //注册按钮
-    LogoutButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 250, 250, 50)];
-    [LogoutButton setTitle:@"Logout" forState:UIControlStateNormal];
-    [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [LogoutButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
-    [LogoutButton addTarget:self action:@selector(TestStartLogout) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:LogoutButton];
-    
     // Register button
-    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 300, 250, 50)];
+    UIButton* RegisterButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 320, 250, 50)];
     [RegisterButton setTitle:@"Register" forState:UIControlStateNormal];
-    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
     [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:RegisterButton];
     
-    // Register button
-    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 350, 250, 50)];
+    // Add friend button
+    UIButton* AddFriendButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 380, 250, 50)];
     [AddFriendButton setTitle:@"Add Friend" forState:UIControlStateNormal];
-    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [AddFriendButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
     [AddFriendButton addTarget:self action:@selector(TestStartAddFriend) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:AddFriendButton];
     
     // Chat button
-    UIButton* ChatButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 400, 250, 50)];
+    UIButton* ChatButton = [[UIButton alloc]initWithFrame:CGRectMake(30, 440, 250, 50)];
     [ChatButton setTitle:@"Test chat" forState:UIControlStateNormal];
-    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationHighlight"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateDisabled];
-    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"RegistrationNormal"]stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+    [ChatButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
     [ChatButton addTarget:self action:@selector(TestChat) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:ChatButton];
+    
+    // User password text field
+    UserPassword = [[UITextField alloc] initWithFrame:CGRectMake(30, 260, 250, 40)];
+    UserPassword.placeholder = @"请输入密码";
+    
+    UserPassword.background = [[UIImage imageNamed:@"BtnTemplate_DefaultWhite"] stretchableImageWithLeftCapWidth:9 topCapHeight:9];
+    
+    [self.view  addSubview:UserPassword];
 }
 
 //-(void)viewWillAppear:(BOOL)animated{
@@ -277,7 +272,7 @@
     //生成消息对象
     NSString* targetJID = [[NSString alloc] initWithFormat:@"%@@%@", @"ls", ServerHostName];
     XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:targetJID]];
-    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:msgJson]];
+    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:@"I'm test"]];
     
     //发送消息
     [[TdServerConnectorMgr Instance] sendMessage:mes];
