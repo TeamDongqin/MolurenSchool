@@ -44,7 +44,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define CHAT_BUTTON_SIZE 70
 #define INSETS 10
 
-// Login view controller background color
+// View controllers background color
 #define COLOR_LOGINVCBG     0xE5E5E5
+#define COLOR_REGISTERGB    0xEFEFF4
+
+// Navigation bar height
+#define NavigationBar_Height 64.0
 
 @end

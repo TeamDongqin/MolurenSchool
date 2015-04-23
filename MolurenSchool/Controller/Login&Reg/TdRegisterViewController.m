@@ -21,17 +21,26 @@
 @property (nonatomic, strong) UITextField *UserDescription;
 @property (nonatomic, strong) UIButton *UserPortrait;
 @property (nonatomic, strong) UILabel* Intro;
+@property (nonatomic, strong) UIImageView* CountrySelectionView;
+@property (nonatomic, strong) UIImageView* CountryNumberView;
+@property (nonatomic, strong) UILabel* Label1;
+@property (nonatomic, strong) UILabel* Label2;
+@property (nonatomic, strong) UILabel* Label3;
+@property (nonatomic, strong) UIImageView* RightIndicator;
 
 @end
 
 @implementation TdRegisterViewController
 
-@synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription, UserPortrait, Intro;
+@synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription,
+            UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, RightIndicator, CountryNumberView;
 
 #pragma mark - View life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = UIColorFromRGB(COLOR_REGISTERGB);
     
     // User login name
     UserLoginName = [[UITextField alloc]initWithFrame:CGRectInset(self.view.bounds, 15, 0)];
@@ -40,19 +49,125 @@
     
     [self.view addSubview:UserLoginName];
     
-    [self ApplyConstraints];
-    
+    // Intro
     Intro = [[UILabel alloc] init];
     Intro.text = @"请确认你的国家或地区并输入手机号";
     Intro.textColor = UIColorFromRGB(0x65676C);
     Intro.textAlignment = UITextAlignmentCenter;
-    Intro.font = [UIFont fontWithName:@"Helvetica Neue" size:18];
+    Intro.font = [UIFont fontWithName:@"Helvetica Neue" size:15];
     
     [self.view addSubview:Intro];
+    
+    // Background image
+    UIImage* BgImg = [[UIImage imageNamed:@"BtnTemplate_DefaultWhite"] stretchableImageWithLeftCapWidth:9 topCapHeight:9];
+    
+    // Country selection view
+    Label1 = [[UILabel alloc] init];
+    Label1.text = @"国家和地区";
+    Label1.textColor = UIColorFromRGB(0x65676C);
+    Label1.textAlignment = UITextAlignmentLeft;
+    Label1.font = [UIFont fontWithName:@"Helvetica Neue" size:19];
+    
+    Label2 = [[UILabel alloc] init];
+    Label2.text = @"新加坡";
+    Label2.textColor = [UIColor blackColor];
+    Label2.textAlignment = UITextAlignmentLeft;
+    Label2.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
+    
+    RightIndicator = [[UIImageView alloc] init];
+    RightIndicator.image = [UIImage imageNamed:@"RightIndicator"];
+    
+    CountrySelectionView = [[UIImageView alloc] init];
+    CountrySelectionView.image = BgImg;
+    
+    
+    [CountrySelectionView addSubview:Label1];
+    [CountrySelectionView addSubview:Label2];
+    [CountrySelectionView addSubview:RightIndicator];
+    
+    [self.view addSubview:CountrySelectionView];
+    
+    // Country number view
+    
+    Label3 = [[UILabel alloc] init];
+    Label3.text = @"+65";
+    Label3.textColor = [UIColor blackColor];
+    Label3.textAlignment = UITextAlignmentCenter;
+    Label3.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
+    
+    CountryNumberView = [[UIImageView alloc] init];
+    CountryNumberView.image = BgImg;
+    
+    [CountryNumberView addSubview:Label3];
+    
+    [self.view addSubview:CountryNumberView];
+    
+    [self ApplyConstraints];
 }
 
 -(void)ApplyConstraints{
+    // Intro
+    [Intro setTranslatesAutoresizingMaskIntoConstraints:NO];
     
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Intro attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Intro attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Intro attribute:NSLayoutAttributeCenterX
+        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Intro attribute:NSLayoutAttributeTop
+        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:10+NavigationBar_Height]];
+    
+    // Country selection view
+    
+    [Label1 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label1 attribute:NSLayoutAttributeLeading
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label1 attribute:NSLayoutAttributeCenterY
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [Label2 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label2 attribute:NSLayoutAttributeTrailing
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-30]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label2 attribute:NSLayoutAttributeCenterY
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [CountrySelectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountrySelectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountrySelectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountrySelectionView attribute:NSLayoutAttributeCenterX
+        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountrySelectionView attribute:NSLayoutAttributeTop
+        relatedBy:NSLayoutRelationEqual toItem:Intro attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+    
+    [Label3 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label3 attribute:NSLayoutAttributeCenterX
+        relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label3 attribute:NSLayoutAttributeCenterY
+        relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [CountryNumberView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:80]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeLeading
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeTop
+        relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
 }
 
 - (void)didReceiveMemoryWarning {
