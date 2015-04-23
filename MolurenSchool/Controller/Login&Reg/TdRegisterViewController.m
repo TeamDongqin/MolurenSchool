@@ -20,12 +20,13 @@
 @property (nonatomic, strong) UITextField *UserNickName;
 @property (nonatomic, strong) UITextField *UserDescription;
 @property (nonatomic, strong) UIButton *UserPortrait;
+@property (nonatomic, strong) UILabel* Intro;
 
 @end
 
 @implementation TdRegisterViewController
 
-@synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription, UserPortrait;
+@synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription, UserPortrait, Intro;
 
 #pragma mark - View life cycle
 
@@ -38,6 +39,19 @@
     UserLoginName.delegate = self;
     
     [self.view addSubview:UserLoginName];
+    
+    [self ApplyConstraints];
+    
+    Intro = [[UILabel alloc] init];
+    Intro.text = @"请确认你的国家或地区并输入手机号";
+    Intro.textColor = UIColorFromRGB(0x65676C);
+    Intro.textAlignment = UITextAlignmentCenter;
+    Intro.font = [UIFont fontWithName:@"Helvetica Neue" size:18];
+    
+    [self.view addSubview:Intro];
+}
+
+-(void)ApplyConstraints{
     
 }
 
