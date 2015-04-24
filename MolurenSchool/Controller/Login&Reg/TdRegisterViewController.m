@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UILabel* Label1;
 @property (nonatomic, strong) UILabel* Label2;
 @property (nonatomic, strong) UILabel* Label3;
+@property (nonatomic, strong) UILabel* Label4;
 @property (nonatomic, strong) UIImageView* RightIndicator;
 
 @end
@@ -36,8 +37,8 @@
 @implementation TdRegisterViewController
 
 @synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription,
-            UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, RightIndicator, CountryNumberView,
-            InputPhoneNoView, RegisterButton;
+            UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, Label4, RightIndicator,
+            CountryNumberView, InputPhoneNoView, RegisterButton;
 
 #pragma mark - View life cycle
 
@@ -119,6 +120,16 @@
     [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:RegisterButton];
+    
+    Label4 = [[UILabel alloc] init];
+    Label4.text = @"轻触上面的『注册』按钮，即表示你同意《软件许可及服务协议》";
+    Label4.textColor = UIColorFromRGB(0x65676C);
+    Label4.textAlignment = UITextAlignmentLeft;
+    Label4.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+    Label4.lineBreakMode = NSLineBreakByWordWrapping;
+    Label4.numberOfLines = 0;
+    
+    [self.view addSubview: Label4];
     
     [self ApplyConstraints];
 }
@@ -224,6 +235,15 @@
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeTop
        relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+    
+    [Label4 setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label4 attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:RegisterButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label4 attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:RegisterButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label4 attribute:NSLayoutAttributeTrailing
+        relatedBy:NSLayoutRelationEqual toItem:RegisterButton attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10]];
 }
 
 - (void)didReceiveMemoryWarning {
