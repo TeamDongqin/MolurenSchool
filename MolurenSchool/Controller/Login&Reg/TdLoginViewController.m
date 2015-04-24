@@ -326,10 +326,6 @@
     [[TdServerConnectorMgr Instance] disconnect];
 }
 
--(void)TestStartRegister{
-    [[TdServerConnectorMgr Instance] Register:@"test" withPassword:@"test"];
-}
-
 -(void)TestStartAddFriend{
     [[TdServerConnectorMgr Instance] addSomeBody:@"ls"];
 }

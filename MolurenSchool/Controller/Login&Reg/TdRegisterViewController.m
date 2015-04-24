@@ -10,6 +10,7 @@
 #import "ASIFormDataRequest.h"
 #import "MMProgressHUD.h"
 #import "SBJsonParser.h"
+#import "TdServerConnectorMgr.h"
 
 @interface TdRegisterViewController ()
 
@@ -20,9 +21,11 @@
 @property (nonatomic, strong) UITextField *UserNickName;
 @property (nonatomic, strong) UITextField *UserDescription;
 @property (nonatomic, strong) UIButton *UserPortrait;
+@property (nonatomic, strong) UIButton *RegisterButton;
 @property (nonatomic, strong) UILabel* Intro;
 @property (nonatomic, strong) UIImageView* CountrySelectionView;
 @property (nonatomic, strong) UIImageView* CountryNumberView;
+@property (nonatomic, strong) UIImageView* InputPhoneNoView;
 @property (nonatomic, strong) UILabel* Label1;
 @property (nonatomic, strong) UILabel* Label2;
 @property (nonatomic, strong) UILabel* Label3;
@@ -33,7 +36,8 @@
 @implementation TdRegisterViewController
 
 @synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription,
-            UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, RightIndicator, CountryNumberView;
+            UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, RightIndicator, CountryNumberView,
+            InputPhoneNoView, RegisterButton;
 
 #pragma mark - View life cycle
 
@@ -41,13 +45,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColorFromRGB(COLOR_REGISTERGB);
-    
-    // User login name
-    UserLoginName = [[UITextField alloc]initWithFrame:CGRectInset(self.view.bounds, 15, 0)];
-    UserLoginName.placeholder = @"请填写手机号码";
-    UserLoginName.delegate = self;
-    
-    [self.view addSubview:UserLoginName];
     
     // Intro
     Intro = [[UILabel alloc] init];
@@ -102,6 +99,27 @@
     
     [self.view addSubview:CountryNumberView];
     
+    // Input phone view
+    
+    UserLoginName = [[UITextField alloc]initWithFrame:CGRectInset(self.view.bounds, 15, 0)];
+    UserLoginName.placeholder = @"请填写手机号码";
+    UserLoginName.delegate = self;
+    
+    InputPhoneNoView = [[UIImageView alloc] init];
+    InputPhoneNoView.image = BgImg;
+    
+    [InputPhoneNoView addSubview:UserLoginName];
+    
+    [self.view addSubview:InputPhoneNoView];
+    
+    // Register button
+    RegisterButton = [[UIButton alloc] init];
+    [RegisterButton setTitle:@"注册" forState:UIControlStateNormal];
+    [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
+    [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:RegisterButton];
+    
     [self ApplyConstraints];
 }
 
@@ -137,6 +155,14 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:Label2 attribute:NSLayoutAttributeCenterY
         relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     
+    [RightIndicator setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RightIndicator attribute:NSLayoutAttributeTrailing
+         relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RightIndicator attribute:NSLayoutAttributeCenterY
+         relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
     [CountrySelectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountrySelectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
@@ -168,6 +194,36 @@
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeTop
         relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+    
+    [UserLoginName setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeLeading
+        relatedBy:NSLayoutRelationEqual toItem:InputPhoneNoView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeCenterY
+        relatedBy:NSLayoutRelationEqual toItem:InputPhoneNoView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [InputPhoneNoView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:InputPhoneNoView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:InputPhoneNoView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:InputPhoneNoView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:InputPhoneNoView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [RegisterButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeCenterX
+       relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeTop
+       relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -364,6 +420,12 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         //
     }];
+}
+
+#pragma mark - User operation
+
+-(void)TestStartRegister{
+    [[TdServerConnectorMgr Instance] Register:@"test" withPassword:@"test"];
 }
 
 @end
