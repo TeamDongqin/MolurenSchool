@@ -25,7 +25,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
 
-    self.navigationItem.title=_chatPerson.userNickname;
+    self.navigationItem.title = @"舍友";
+    //self.navigationItem.title=_chatPerson.userNickname;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(newMsgCome:) name:kXMPPNewMsgNotifaction object:nil];
     

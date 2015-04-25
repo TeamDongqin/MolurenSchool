@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TdMessage.h"
 
-// Portrait size
-#define HEAD_SIZE 50.0f
-#define TEXT_MAX_HEIGHT 500.0f
-
 // Insets
 #define INSETS 8.0f
 

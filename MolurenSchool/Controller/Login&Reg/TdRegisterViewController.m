@@ -45,7 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"注册";
+    
     self.view.backgroundColor = UIColorFromRGB(COLOR_REGISTERGB);
+    
+    // Left bar button
     
     // Intro
     Intro = [[UILabel alloc] init];
@@ -102,16 +106,16 @@
     
     // Input phone view
     
-    UserLoginName = [[UITextField alloc]initWithFrame:CGRectInset(self.view.bounds, 15, 0)];
+    UserLoginName = [[UITextField alloc] init];
     UserLoginName.placeholder = @"请填写手机号码";
     UserLoginName.delegate = self;
     
     InputPhoneNoView = [[UIImageView alloc] init];
     InputPhoneNoView.image = BgImg;
     
-    [InputPhoneNoView addSubview:UserLoginName];
-    
     [self.view addSubview:InputPhoneNoView];
+    
+    [self.view addSubview:UserLoginName];
     
     // Register button
     RegisterButton = [[UIButton alloc] init];

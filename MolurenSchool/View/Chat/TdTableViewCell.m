@@ -37,7 +37,8 @@
         [self.contentView addSubview:_chatImage];
         // [_chatImage setBackgroundColor:[UIColor redColor]];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [_headMask setImage:[[UIImage imageNamed:@"DefaultUserPortrait"]stretchableImageWithLeftCapWidth:10 topCapHeight:10]];
+        //[_headMask setImage:[[UIImage imageNamed:@"TestUserPortrait"]stretchableImageWithLeftCapWidth:10 topCapHeight:10]];
+        [_headMask setImage:[UIImage imageNamed:@"TestUserPortrait"]];
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;

@@ -28,8 +28,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define ServerHostName @"120.27.46.123"
 
 // Portrait
-#define HEAD_SIZE 50.0f
+#define HEAD_SIZE 30.0f
 #define INSETS 8.0f
+#define TEXT_MAX_HEIGHT 500.0f
 
 #define CELL_HEIGHT self.contentView.frame.size.height
 #define CELL_WIDTH self.contentView.frame.size.width
