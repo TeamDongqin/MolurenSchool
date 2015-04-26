@@ -11,6 +11,7 @@
 #import "MMProgressHUD.h"
 #import "SBJsonParser.h"
 #import "TdServerConnectorMgr.h"
+#import "FriendCircleViewController.h"
 
 @interface TdRegisterViewController ()
 
@@ -136,6 +137,8 @@
     [self.view addSubview: Label4];
     
     [self ApplyConstraints];
+    
+    [self.navigationController pushViewController:[[FriendCircleViewController alloc] init] animated:YES];
 }
 
 -(void)ApplyConstraints{
