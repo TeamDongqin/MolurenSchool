@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIImageView* CountrySelectionView;
 @property (nonatomic, strong) UIImageView* CountryNumberView;
 @property (nonatomic, strong) UIImageView* InputPhoneNoView;
+@property (nonatomic, strong) UIImageView* UserPasswordView;
 @property (nonatomic, strong) UILabel* Label1;
 @property (nonatomic, strong) UILabel* Label2;
 @property (nonatomic, strong) UILabel* Label3;
@@ -38,7 +39,7 @@
 
 @synthesize LoginNumberVIew, LoginPassView, UserLoginName, UserPwd, UserNickName, UserDescription,
             UserPortrait, Intro, CountrySelectionView, Label1, Label2, Label3, Label4, RightIndicator,
-            CountryNumberView, InputPhoneNoView, RegisterButton;
+            CountryNumberView, InputPhoneNoView, RegisterButton, UserPasswordView;
 
 #pragma mark - View life cycle
 
@@ -117,11 +118,24 @@
     
     [self.view addSubview:UserLoginName];
     
+    // User password view
+    
+    UserPwd = [[UITextField alloc] init];
+    UserPwd.placeholder = @"请输入密码";
+    UserPwd.delegate = self;
+    
+    UserPasswordView = [[UIImageView alloc] init];
+    UserPasswordView.image = BgImg;
+    
+    [self.view addSubview:UserPasswordView];
+    
+    [self.view addSubview:UserPwd];
+    
     // Register button
     RegisterButton = [[UIButton alloc] init];
     [RegisterButton setTitle:@"注册" forState:UIControlStateNormal];
     [RegisterButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
-    [RegisterButton addTarget:self action:@selector(TestStartRegister) forControlEvents:UIControlEventTouchUpInside];
+    [RegisterButton addTarget:self action:@selector(Register) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:RegisterButton];
     
@@ -210,6 +224,8 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:CountryNumberView attribute:NSLayoutAttributeTop
         relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
     
+    // User login name view
+    
     [UserLoginName setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeLeading
@@ -228,6 +244,28 @@
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:InputPhoneNoView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     
+    // User password view
+    
+    [UserPwd setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPwd attribute:NSLayoutAttributeLeading
+                                                          relatedBy:NSLayoutRelationEqual toItem:UserPasswordView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPwd attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual toItem:UserPasswordView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    [UserPasswordView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPasswordView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPasswordView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:CountrySelectionView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPasswordView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserPasswordView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+    
+    // Register button
+    
     [RegisterButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
@@ -238,7 +276,7 @@
        relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:RegisterButton attribute:NSLayoutAttributeTop
-       relatedBy:NSLayoutRelationEqual toItem:CountryNumberView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
+       relatedBy:NSLayoutRelationEqual toItem:UserPasswordView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:12]];
     
     [Label4 setTranslatesAutoresizingMaskIntoConstraints:NO];
     
@@ -448,8 +486,8 @@
 
 #pragma mark - User operation
 
--(void)TestStartRegister{
-    [[TdServerConnectorMgr Instance] Register:@"test" withPassword:@"test"];
+-(void)Register{
+    [[TdServerConnectorMgr Instance] Register:UserLoginName.text withPassword:UserPwd.text];
 }
 
 @end
