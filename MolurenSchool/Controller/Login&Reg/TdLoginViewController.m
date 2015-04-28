@@ -13,7 +13,8 @@
 @interface TdLoginViewController ()
 
 @property (nonatomic, strong) UIImageView *UserPortrait;
-@property (nonatomic, strong) UILabel *UserLoginName;
+@property (nonatomic, strong) UILabel *ExistingUserLoginName;
+@property (nonatomic, strong) UITextField *UserLoginName;
 @property (nonatomic, strong) UITextField *UserPassword;
 @property (nonatomic, strong) UIButton *LoginButton;
 @property (nonatomic, strong) UIButton *LogoutButton;
@@ -50,7 +51,7 @@
     LoginButton = [[UIButton alloc] init];
     [LoginButton setTitle:@"登录" forState:UIControlStateNormal];
     [LoginButton setBackgroundImage:[[UIImage imageNamed:@"BtnTemplate_ActiveGreen"]stretchableImageWithLeftCapWidth:9 topCapHeight:9] forState:UIControlStateNormal];
-    [LoginButton addTarget:self action:@selector(TestStartLogin) forControlEvents:UIControlEventTouchUpInside];
+    [LoginButton addTarget:self action:@selector(Login) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:LoginButton];
     
@@ -66,12 +67,20 @@
     
     [self.view  addSubview:UserPassword];
     
-    // User login name
-    UserLoginName = [[UILabel alloc] init];
-    UserLoginName.text = @"774761506";
-    UserLoginName.textColor = [UIColor blackColor];
-    UserLoginName.textAlignment = UITextAlignmentCenter;
-    UserLoginName.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    // Exisiting user login name
+//    UserLoginName = [[UILabel alloc] init];
+//    UserLoginName.text = @"774761506";
+//    UserLoginName.textColor = [UIColor blackColor];
+//    UserLoginName.textAlignment = UITextAlignmentCenter;
+//    UserLoginName.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    
+    UserLoginName = [[UITextField alloc] init];
+    UIImageView* paddingView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)];
+
+    UserLoginName.leftView = paddingView1;
+    UserLoginName.leftViewMode = UITextFieldViewModeAlways;
+    UserLoginName.placeholder = @"室友帐号/手机号码";
+    UserLoginName.background = [[UIImage imageNamed:@"BtnTemplate_DefaultWhite"] stretchableImageWithLeftCapWidth:9 topCapHeight:9];
     
     [self.view addSubview:UserLoginName];
     
@@ -132,9 +141,13 @@
     // User login name
     [UserLoginName setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:100]];
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:100]];
+//    
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeHeight  relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeHeight  relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:30]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:289]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:43]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual toItem:self.view
@@ -142,11 +155,11 @@
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeBottom
                                                           relatedBy:NSLayoutRelationEqual toItem:UserPassword
-                                                          attribute:NSLayoutAttributeTop multiplier:1.0 constant:-20]];
+                                                          attribute:NSLayoutAttributeTop multiplier:1.0 constant:-10]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:UserLoginName attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual toItem:UserPortrait
-                                                          attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5]];
+                                                          attribute:NSLayoutAttributeBottom multiplier:1.0 constant:20]];
     
     // User portrait
     [UserPortrait setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -318,8 +331,8 @@
 
 }
 
--(void)TestStartLogin{
-    [[TdServerConnectorMgr Instance] Login:@"test" withPassword:@"test"];
+-(void)Login{
+    [[TdServerConnectorMgr Instance] Login:UserLoginName.text withPassword:UserPassword.text];
 }
 
 -(void)TestStartLogout{
